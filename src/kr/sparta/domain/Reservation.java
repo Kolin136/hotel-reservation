@@ -5,8 +5,8 @@ import java.util.UUID;
 
 public class Reservation {
     private Room room;
-    private  String custormerName;
-    private  String custormerPhoneNumber;
+    private  String customerName;
+    private  String customerPhoneNumber;
     private LocalDate date;
     private UUID reservationNumber;
 
