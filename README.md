@@ -1,1 +1,1 @@
-# Sprata-frist-team-roject
+# Sprata-first-team-roject
