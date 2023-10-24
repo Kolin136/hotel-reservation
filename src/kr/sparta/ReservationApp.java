@@ -10,5 +10,6 @@ public class ReservationApp {
          *  case 2
          * }
          */
+        System.out.println("hello");
     }
 }
