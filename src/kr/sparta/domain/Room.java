@@ -1,10 +1,10 @@
 package kr.sparta.domain;
 
 public class Room {
-    private int roomSize;
-    private int roomID;
-    private int fee;
-    private boolean reserved;
+    private int roomSize; // 방 size
+    private int roomID; // 룸 번호
+    private int fee; // 요금
+    private boolean reserved; // 예약 완료 check
 
     public Room(int roomSize, int roomID, int fee, boolean reserved){
         this.roomSize = roomSize;
