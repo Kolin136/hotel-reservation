@@ -1,2 +1,9 @@
 package kr.sparta.handler;public class SampleHandler {
+
+    public void test(){
+
+
+
+    }
+
 }
