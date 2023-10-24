@@ -4,33 +4,33 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public class Reservation {
-    private Room room;
+    private int roomId;
     private  String customerName;
     private  String customerPhoneNumber;
     private LocalDate date;
     private UUID reservationNumber;
 
-    public Room getRoom() {
-        return room;
+    public int getRoom() {
+        return roomId;
     }
-    public void setRoom(Room room) {
-        this.room = room;
-    }
-
-
-    public String getCustormerName() {
-        return custormerName;
-    }
-    public void setCustormerName(String custormerName) {
-        this.custormerName = custormerName;
+    public void setRoom(int room) {
+        this.roomId = room;
     }
 
 
-    public String getCustormerPhoneNumber() {
-        return custormerPhoneNumber;
+    public String getCustomerName() {
+        return customerName;
     }
-    public void setCustormerPhoneNumber(String custormerPhoneNumber) {
-        this.custormerPhoneNumber = custormerPhoneNumber;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+
+    public String getCustomerPhoneNumber() {
+        return customerPhoneNumber;
+    }
+    public void setCustomerPhoneNumber(String customerPhoneNumber) {
+        this.customerPhoneNumber = customerPhoneNumber;
     }
 
 
