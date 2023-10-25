@@ -4,11 +4,11 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public class Reservation {
-    private int roomId;
-    private  String customerName;
-    private  String customerPhoneNumber;
-    private LocalDate date;
-    private UUID reservationNumber;
+    private int roomId; // 룸번호
+    private  String customerName; // 고객 이름
+    private  String customerPhoneNumber; // 고객 전화번호
+    private LocalDate date; // 고객 예약 일시
+    private UUID reservationNumber; // 예약 번호 ID
 
     public int getRoom() {
         return roomId;
