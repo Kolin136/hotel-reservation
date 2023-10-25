@@ -1,6 +1,7 @@
 package kr.sparta.handler;
 
 
+import kr.sparta.domain.Hotel;
 import kr.sparta.domain.Reservation;
 
 import java.io.BufferedReader;
@@ -19,8 +20,14 @@ public class ReserveHandler {
 
     public Reservation reserve() throws IOException {
         Reservation reservation;
+        Hotel hotel;
         String name = br.readLine();
         String tel = br.readLine();
+
+
+        //while문안에서 예약일,방 선택후 if문으로 호텔의 ReservationList에서 객체 하나하나 보면서 중복 예약일,방 있으면 다시
+        //while문 첫줄 실행하고 중복없으면  Reservation 생성후 리턴
+
 
         // 예약하기 작업후 룸날짜,정보 결정후 예약하기 생성자 매개변수에 넣어준다.
        // reservation = new Reservation(rommId, name, tel, date, reservationNumber);
