@@ -1,5 +1,6 @@
 package kr.sparta.handler;
 
+import kr.sparta.dao.ReservationDAO;
 import kr.sparta.domain.Reservation;
 
 import java.io.BufferedReader;
@@ -20,25 +21,17 @@ public class CheckHandler {
      */
 
     BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-    /**
-     * ReservationDao dao = new ReservationDao();
-     */
 
-    public void printCheckPage() {
-        System.out.println("[ 예약조회 ]");
-        System.out.println("예약번호를 입력해주세요. ");
-        int reservationId = getNumber();
-        Reservation reservation = getReservation(reservationId);
-        System.out.println("예약하신 내역입니다." + reservation);
+    ReservationDAO dao = new ReservationDAO();
+
+
+    public Reservation getReservation(String reservationId) {
+
+        Reservation reservation = dao.getInquiry(reservationId);
+        return reservation;
+
     }
 
-    public Reservation getReservation(int reservationId) {
-        /**
-         * Reservation reservation = dao.selectReservationById(reservationId);
-         *   return reservation;
-         */
-
-     }
     public int getNumber(){
         try {
             int number = Integer.parseInt(in.readLine());
@@ -63,7 +56,7 @@ public class CheckHandler {
         }
     }
 
-    public void cancleReservation(Reservation reservationId) {
+    public void cancleReservation(String reservationId) {
         //dao.cancleReservation(reservationId);
         //리턴값을 줘서 취소가 완료되었다는 것을 알려줘도 괜찮을 듯.
         //reservationList에서 cancleFlag를 true로 해도 되고

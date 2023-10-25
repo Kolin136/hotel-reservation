@@ -31,7 +31,7 @@ public class ReserveHandler {
 
 
         // 예약하기 작업후 룸날짜,정보 결정후 예약하기 생성자 매개변수에 넣어준다.
-       // reservation = new Reservation(rommId, name, tel, date, reservationNumber);
+        // reservation = new Reservation(rommId, name, tel, date, reservationNumber);
 
         //return reservation;
     }
@@ -48,12 +48,6 @@ public class ReserveHandler {
 
 
 
-
-
-    public void printPage(int y, int m) {
-        //sout 실행할 메소드.
-
-    }
 
 
 }
