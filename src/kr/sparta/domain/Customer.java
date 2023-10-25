@@ -5,8 +5,7 @@ import java.util.UUID;
 public class Customer {
     private String name; //이름
     private String phoneNumber; //전화번호(XXX-XXXX-XXXX)정규표현식
-    private int cash; //
-    private UUID reservationNumber; //예약번호
+    private int cash;
 
 
     public Customer(String name, String phoneNumber, int cash) {
@@ -37,13 +36,5 @@ public class Customer {
 
     public void setCash(int cash) {
         this.cash = cash;
-    }
-
-    public UUID getReservationNumber() {
-        return reservationNumber;
-    }
-
-    public void setReservationNumber(UUID reservationNumber) {
-        this.reservationNumber = reservationNumber;
     }
 }

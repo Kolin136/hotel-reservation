@@ -3,18 +3,27 @@ package kr.sparta;
 //import kr.sparta.handler.CheckHandler;
 //import kr.sparta.handler.ReserveHandler;
 
+import kr.sparta.domain.Reservation;
+import kr.sparta.handler.CheckHandler;
+import kr.sparta.handler.ReserveHandler;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.UUID;
+
 public class ReservationApp {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //글씨 꾸미기~
         final String ANSI_RESET = "\u001B[0m";
         final String ANSI_YELLOW = "\u001B[33m";
         //
         //메인 화면 프린트해주고 입력받기 -> 어떤 클래스가 메소드를 가져야하는지
-        //int number = 클래스.getNumber()
-        int number = 0;
 
-//        ReserveHandler reserveHandler = new ReserveHandler();
-//        CheckHandler checkHandler = new CheckHandler();
+
+        ReserveHandler reserveHandler = new ReserveHandler();
+        CheckHandler checkHandler = new CheckHandler();
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
         //스위치 안에 1예약하기, 2 예약조회/취소,
         while_loop:
@@ -23,7 +32,7 @@ public class ReservationApp {
             System.out.println("------------------------------------------------------");
             System.out.println("1. 예약하기");
             System.out.println("2. 예약확인/취소");
-//            int number = 클래스.getNumber();
+            int number = Integer.parseInt(in.readLine());
             switch (number) {
                 case 1:
                     //reserveHandler.showRooms() - "roomID호. roomSize fee 예약가능여부(이건 어떻게) 로 쫘르르 출력
@@ -31,25 +40,30 @@ public class ReservationApp {
                     //예약하기
                     break;
                 case 2:
+                    //2f48f241-9d64-4d16-bf56-70b9d4e0e79a
                     //예약 조회/취소
-                    //UUID reservationNumber = 클래스.getNumber() 사용자에게 예약번호 입력요청.
-                    //CheckHandler.checkReservation(reservationNumber) -> 이 번호에 해당하는 Reservation이 있으면 출력, 없으면 해당하는 예약이 없습니다.
+                    System.out.println(ANSI_YELLOW + "\"예약확인\"" + ANSI_RESET);
+                    System.out.println("------------------------------------------------------");
                     System.out.println("1. 예약 취소    2. 메인 메뉴로");
-//                    switch (클래스.getNumber()) {
-//                        case 1:
-//                            System.out.println("정말 예약을 취소하시겠습니까?");
-//                            System.out.println("1. 예       2. 아니오");
-//                            switch (클래스.getNumber()) {
-//                                case 1:
-//                                    CheckHandler.cancelReservation(DAO.getReservationByReservationNumber(reservationNumber));
-//                                    break;
-//                                default:
-//                                    break;
-//                            }
-//                        default:
-//                            break;
-//                    }
-//                    break;
+                    String reservationNumber = in.readLine(); //사용자에게 예약번호 입력요청.
+                    Reservation reservation = checkHandler.getReservation(reservationNumber);// -> 이 번호에 해당하는 Reservation이 있으면 출력, 없으면 해당하는 예약이 없습니다.
+                    int choice = Integer.parseInt(in.readLine());
+                    switch (choice) {
+                        case 1:
+                            System.out.println("정말 예약을 취소하시겠습니까?");
+                            System.out.println("1. 예       2. 아니오");
+                            int number1 = Integer.parseInt(in.readLine());
+                            switch (number1) {
+                                case 1:
+                                    checkHandler.cancleReservation(reservationNumber);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        default:
+                            break;
+                    }
+                    break;
                 case 0:
                     break while_loop;
                 default:

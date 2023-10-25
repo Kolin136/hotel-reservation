@@ -8,24 +8,23 @@ public class Reservation {
     private String customerName; // 고객 이름
     private String customerPhoneNumber; // 고객 전화번호
     private LocalDate date; // 고객 예약 일시
-    private UUID reservationNumber; // 예약 번호 ID
+    private String reservationNumber; // 예약 번호 ID
 
-    public Reservation(int rommId, String customerName, String customerPhoneNumber, LocalDate date, UUID reservationNumber) {
-        this.roomId = rommId;
+    public Reservation(int roomId, String customerName, String customerPhoneNumber, LocalDate date, String reservationNumber) {
+        this.roomId = roomId;
         this.customerName = customerName;
         this.customerPhoneNumber = customerPhoneNumber;
         this.date = date;
         this.reservationNumber = reservationNumber;
     }
 
-    public int getRoom() {
+    public int getRoomId() {
         return roomId;
     }
 
-    public void setRoom(int room) {
-        this.roomId = room;
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
     }
-
 
     public String getCustomerName() {
         return customerName;
@@ -35,7 +34,6 @@ public class Reservation {
         this.customerName = customerName;
     }
 
-
     public String getCustomerPhoneNumber() {
         return customerPhoneNumber;
     }
@@ -43,7 +41,6 @@ public class Reservation {
     public void setCustomerPhoneNumber(String customerPhoneNumber) {
         this.customerPhoneNumber = customerPhoneNumber;
     }
-
 
     public LocalDate getDate() {
         return date;
@@ -53,12 +50,11 @@ public class Reservation {
         this.date = date;
     }
 
-
-    public UUID getReservationNumber() {
+    public String getReservationNumber() {
         return reservationNumber;
     }
 
-    public void setReservationNumber(UUID reservationNumber) {
+    public void setReservationNumber(String reservationNumber) {
         this.reservationNumber = reservationNumber;
     }
 }
