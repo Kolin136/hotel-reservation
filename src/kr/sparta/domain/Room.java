@@ -1,24 +1,32 @@
 package kr.sparta.domain;
 
 public class Room {
-    private int roomSize; // 방 size
+
+    public enum roomSizeType{
+        standard,
+        superior,
+        deluxe
+    }
+    private roomSizeType roomSize; // 방 size
     private int roomID; // 룸 번호
     private int fee; // 요금
     private boolean reserved; // 예약 완료 check
 
-    public Room(int roomSize, int roomID, int fee, boolean reserved){
+    public Room(roomSizeType roomSize, int roomID, int fee, boolean reserved){
         this.roomSize = roomSize;
         this.roomID = roomID;
         this.fee = fee;
         this.reserved = reserved;
     }
 
-    public int getRoomSize() {
+    public roomSizeType getRoomSize() {
         return roomSize;
     }
-    public void setRoomSize(int roomSize) {
+
+    public void setRoomSize(roomSizeType roomSize) {
         this.roomSize = roomSize;
     }
+
     public int getRoomID() {
         return roomID;
     }

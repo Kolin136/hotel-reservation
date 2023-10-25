@@ -8,9 +8,42 @@ public class Customer {
     private int cash; //
     private UUID reservationNumber; //예약번호
 
+
     public Customer(String name, String phoneNumber, int cash) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.cash = cash;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public int getCash() {
+        return cash;
+    }
+
+    public void setCash(int cash) {
+        this.cash = cash;
+    }
+
+    public UUID getReservationNumber() {
+        return reservationNumber;
+    }
+
+    public void setReservationNumber(UUID reservationNumber) {
+        this.reservationNumber = reservationNumber;
     }
 }
