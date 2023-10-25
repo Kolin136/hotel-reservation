@@ -2,17 +2,19 @@ package kr.sparta.domain;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Hotel {
 
     private ArrayList<Room> roomList; // 룸 정보 리스트
-
     private ArrayList<Reservation> reservationList; // 예약 정보 리스트
+    protected ArrayList<ManagementRoom> managementRoom;
 
-    private int assets; // 자산
 
-    public void Hotel(ArrayList<Room> roomList, ArrayList<Reservation> reservationList, int assets){
-        this.roomList = roomList;
+
+    private long assets = 50000000L; // 자산 5천마넌 시작
+    public Hotel(ArrayList<ManagementRoom> managementRoom, ArrayList<Reservation> reservationList, long assets){
+        this.managementRoom = managementRoom;
         this.reservationList = reservationList;
         this.assets = assets;
     }
@@ -20,20 +22,32 @@ public class Hotel {
     public ArrayList<Room> getRoomList() {
         return roomList;
     }
+
     public void setRoomList(ArrayList<Room> roomList) {
         this.roomList = roomList;
     }
+
     public ArrayList<Reservation> getReservationList() {
-        return this.reservationList;
+        return reservationList;
     }
+
     public void setReservationList(ArrayList<Reservation> reservationList) {
         this.reservationList = reservationList;
     }
-    public int getAssets() {
-        return assets;
-    }
-    public void setAssets(int assets) {
-        this.assets = assets;
+
+    public ArrayList<ManagementRoom> getManagementRoom() {
+        return managementRoom;
     }
 
+    public void setManagementRoom(ArrayList<ManagementRoom> managementRoom) {
+        this.managementRoom = managementRoom;
+    }
+
+    public long getAssets() {
+        return assets;
+    }
+
+    public void setAssets(long assets) {
+        this.assets = assets;
+    }
 }
