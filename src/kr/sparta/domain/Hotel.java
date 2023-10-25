@@ -16,6 +16,7 @@ public class Hotel {
         this.reservationList = reservationList;
         this.assets = assets;
     }
+
     public ArrayList<Room> getRoomList() {
         return roomList;
     }
@@ -23,7 +24,7 @@ public class Hotel {
         this.roomList = roomList;
     }
     public ArrayList<Reservation> getReservationList() {
-        return reservationList;
+        return this.reservationList;
     }
     public void setReservationList(ArrayList<Reservation> reservationList) {
         this.reservationList = reservationList;
