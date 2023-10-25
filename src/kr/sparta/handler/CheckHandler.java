@@ -63,7 +63,7 @@ public class CheckHandler {
         }
     }
 
-    public void cancleReservation(int reservationId) {
+    public void cancleReservation(Reservation reservationId) {
         //dao.cancleReservation(reservationId);
         //리턴값을 줘서 취소가 완료되었다는 것을 알려줘도 괜찮을 듯.
         //reservationList에서 cancleFlag를 true로 해도 되고
