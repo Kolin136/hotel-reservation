@@ -18,6 +18,7 @@ import java.util.UUID;
 public class ReserveHandler {
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+
     public Reservation reserve() throws IOException {
         Reservation reservation;
         Hotel hotel;
@@ -34,6 +35,19 @@ public class ReserveHandler {
 
         //return reservation;
     }
+
+//    public void 객체 UUID 입력 메서드(String UUID제외한 개인정보 )
+//    {
+//        //예약정보
+//        //UUID.getUUID(uuid)
+//        //  DAO 데이터 send
+        // reservation데이터 넣어주고
+    // DAO send (String UUID제외한 개인정보)
+    // inputReserveData
+//    }
+
+
+
 
 
 }

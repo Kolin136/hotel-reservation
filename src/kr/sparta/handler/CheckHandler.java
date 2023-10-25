@@ -32,6 +32,30 @@ public class CheckHandler {
 
     }
 
+    public int getNumber(){
+        try {
+            int number = Integer.parseInt(in.readLine());
+            return number;
+        }catch(Exception ex){
+            return -1; // 숫자로 변환 못할 경우 -1을 리턴한다.
+        }
+    }
+
+    //그냥 스태틱하게 화면만 보여주는 부분이랑 사용자에 입력에 따라 다른 정보를 보여줘야하는 부분을 분리시키면 어떨까.
+    public void printMyReservation() {
+        int reservationId = getNumber();
+        Reservation reservation = getReservation(reservationId);
+        System.out.println("예약하신 내역입니다." + reservation);
+        System.out.println("1. 뒤로가기  2.취소하기");
+        //reservationId 다음으로 전달해주기.
+        int choice = getNumber();
+        if(choice == 1) {
+            return;
+        } else if(choice == 2) {
+            cancleReservation(reservation);
+        }
+    }
+
     public void cancleReservation(String reservationId) {
         //dao.cancleReservation(reservationId);
         //리턴값을 줘서 취소가 완료되었다는 것을 알려줘도 괜찮을 듯.

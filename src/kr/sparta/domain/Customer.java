@@ -7,11 +7,22 @@ public class Customer {
     private String phoneNumber; //전화번호(XXX-XXXX-XXXX)정규표현식
     private int cash;
 
+    private String uuid;
 
-    public Customer(String name, String phoneNumber, int cash) {
+
+    public Customer(String name, String phoneNumber, int cash,String uuid) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.cash = cash;
+        this.uuid = uuid;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public String getName() {
