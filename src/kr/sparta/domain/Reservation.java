@@ -5,14 +5,23 @@ import java.util.UUID;
 
 public class Reservation {
     private int roomId; // 룸번호
-    private  String customerName; // 고객 이름
-    private  String customerPhoneNumber; // 고객 전화번호
+    private String customerName; // 고객 이름
+    private String customerPhoneNumber; // 고객 전화번호
     private LocalDate date; // 고객 예약 일시
     private UUID reservationNumber; // 예약 번호 ID
+
+    public Reservation(int rommId, String customerName, String customerPhoneNumber, LocalDate date, UUID reservationNumber) {
+        this.roomId = rommId;
+        this.customerName = customerName;
+        this.customerPhoneNumber = customerPhoneNumber;
+        this.date = date;
+        this.reservationNumber = reservationNumber;
+    }
 
     public int getRoom() {
         return roomId;
     }
+
     public void setRoom(int room) {
         this.roomId = room;
     }
@@ -21,6 +30,7 @@ public class Reservation {
     public String getCustomerName() {
         return customerName;
     }
+
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
     }
@@ -29,6 +39,7 @@ public class Reservation {
     public String getCustomerPhoneNumber() {
         return customerPhoneNumber;
     }
+
     public void setCustomerPhoneNumber(String customerPhoneNumber) {
         this.customerPhoneNumber = customerPhoneNumber;
     }
@@ -37,6 +48,7 @@ public class Reservation {
     public LocalDate getDate() {
         return date;
     }
+
     public void setDate(LocalDate date) {
         this.date = date;
     }
@@ -45,6 +57,7 @@ public class Reservation {
     public UUID getReservationNumber() {
         return reservationNumber;
     }
+
     public void setReservationNumber(UUID reservationNumber) {
         this.reservationNumber = reservationNumber;
     }
