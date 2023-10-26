@@ -36,7 +36,7 @@ public class ReserveHandler {
         ManagementRoom managementRoom = managementRooms.get(day-1);
 
         //해당 일의 1~3사이즈방 예약가능,불가 가져오기
-        boolean[] roomCheck =managementRoom.getReserveDateFlag();
+        boolean[] roomCheck = managementRoom.getReserveDateFlag();
 
         //예약 가능 방 가능 필터링 결과
         ArrayList<Integer> roomResult = new ArrayList<>();
@@ -52,8 +52,6 @@ public class ReserveHandler {
             String sizeName = managementRoom.getRoomList().getRoomSize()[roomSize-1];
             System.out.printf("%d. %s\n",roomSize,sizeName );
         }
-
-
     }
 
 
@@ -71,7 +69,7 @@ public class ReserveHandler {
 
             if (Pattern.matches("^[1-3]$", String.valueOf(roomSelect))) {
                 //선택한 방사이즈 가격
-                long roomPrice = dao.roomgetPrice(roomSelect);
+                long roomPrice = dao.getRoomPrice(roomSelect);
                 //소지금에 따라 예약 가능,불가 처리
                 if (cash - roomPrice >= 0) {
                     long wallet = cash - roomPrice;

@@ -9,13 +9,13 @@ import java.util.*;
 public class ReservationDAO {
     // 예약 목록 조회
 
-    private ArrayList<ManagementRoom> managementRoom = new ArrayList<>();
+    private static ArrayList<ManagementRoom> managementRoom = new ArrayList<>();
 
-    private ArrayList<Reservation> reservationList = new ArrayList<>();
-    private ArrayList<Customer> customerDataList = new ArrayList<>();
+    private static ArrayList<Reservation> reservationList = new ArrayList<>();
+    private static ArrayList<Customer> customerDataList = new ArrayList<>();
     LocalDate cal = LocalDate.now(); // 현재 요일 받기
     LocalDateTime localDateTime = LocalDateTime.now(); // UTC
-    private Hotel hotel = new Hotel(managementRoom,reservationList,50000000);
+    private static Hotel hotel = new Hotel(managementRoom,reservationList,50000000);
 
 
     // 호텔 내부에 있는 방 정보 입력
@@ -64,7 +64,7 @@ public class ReservationDAO {
     }
 
     // 방 가격 get메서드
-    public long roomgetPrice(int index)
+    public long getRoomPrice(int index)
     {
         return managementRoom.get(0).getRoomList().getFee()[index-1];
     }
