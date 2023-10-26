@@ -89,23 +89,6 @@ public class ReservationApp {
                     System.out.println("예약번호를 입력해주세요.");
                     String customerReservationNumber = in.readLine();
                     checkHandler.printMyReservation(customerReservationNumber);
-                    int choice = Integer.parseInt(in.readLine());
-                    switch (choice) {
-                        case 1:
-                            System.out.println("정말 예약을 취소하시겠습니까?");
-                            System.out.println("1. 예       2. 아니오");
-                            int number1 = Integer.parseInt(in.readLine());
-                            switch (number1) {
-                                case 1:
-                                    checkHandler.cancelReservation(customerReservationNumber);
-                                    break;
-                                default:
-                                    break;
-                            }
-                            break;
-                        default:
-                            break;
-                    }
                     break;
                 case 3:
                     for(int i = 0; i < n; i++) {
