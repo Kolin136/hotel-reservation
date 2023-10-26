@@ -75,10 +75,13 @@ public class ReservationApp {
                     System.out.println("본인의 보유 현금을 입력해주세요.");
                     cash = Integer.parseInt(in.readLine());
 
-                    //reserveHandler.showRooms(cash, day); //여기서 보유현금과 원하는 날짜에 부합하는 객실들만 쫘르르 출력    managementRoom[26]  3개방이 있을 테니.
-                    System.out.println("원하는 객실을 선택해주세요.");
+                    System.out.println(day);
+                    reserveHandler.show(day); //여기서 보유현금과 원하는 날짜에 부합하는 객실들만 쫘르르 출력    managementRoom[26]  3개방이 있을 테니.
+//                    System.out.println("원하는 객실을 선택해주세요.");
+                    reserveHandler.reserve(customerName, customerPhoneNumber, cash, day);
 
                     //예약 확정 전 정보 출력도 해주기
+                    ////
                     System.out.println("이 정보로 예약하시겠습니까?");
                     System.out.println("성함: " + customerName);
                     System.out.println("연락처: " + customerPhoneNumber);
@@ -87,6 +90,7 @@ public class ReservationApp {
                     System.out.println("예약일자: " + now.getYear() + "." + now.getMonthValue() + "." + day);
                     System.out.println("------------------------------------------------------");
                     System.out.println("1. 예약확정                 2. 메인 메뉴로");//간격 tap*5로 통일
+                    /////
                     int option = Integer.parseInt(in.readLine());
                     if(option == 1) {
                         //reserveHandler.reserve(name, phoneNumber, DATE, cash);
@@ -132,6 +136,7 @@ public class ReservationApp {
                 case 3:
                     for(int i = 0; i < n; i++) {
                         ArrayList<ManagementRoom> mRoomList = dao.getRoomData();
+                        System.out.println(mRoomList.size());
                         for(ManagementRoom mRoom: mRoomList) {
                             System.out.println();
                             System.out.println("Day" + i);

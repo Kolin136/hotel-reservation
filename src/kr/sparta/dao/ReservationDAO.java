@@ -118,6 +118,8 @@ public class ReservationDAO {
             {
                 hotel.getManagementRoom().get(hotel.getReservationList().get(i).getAccommodationDay())
                         .getReserveDateFlag()[hotel.getReservationList().get(i).getRoomId()-1] = false;
+
+
                 roomcash = hotel.getManagementRoom().get(i).getRoomList().getFee()[hotel.getReservationList().get(i).getRoomId()-1];
                 hotel.getReservationList().remove(i);
                 removeHotelUserFlag = true;
@@ -132,6 +134,7 @@ public class ReservationDAO {
                     removeUserFlag = true;
                     break;
                 }
+
             }
         }
         if(removeHotelUserFlag && removeUserFlag)
