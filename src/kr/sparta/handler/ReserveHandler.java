@@ -1,31 +1,29 @@
 package kr.sparta.handler;
 
-
 import kr.sparta.dao.ReservationDAO;
-import kr.sparta.domain.Hotel;
 import kr.sparta.domain.ManagementRoom;
-import kr.sparta.domain.Reservation;
-import kr.sparta.domain.Room;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.UUID;
 import java.util.regex.Pattern;
 
-/**
- * 예약과 관련된 기능 수행.
- * 해야하는 역할 정보를 입력받아서 객체 생성.
- */
+
 public class ReserveHandler {
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-
     ReservationDAO dao = new ReservationDAO();
     int n = dao.inputManagementRoom();
+
+//    public void showAll(int year,int month){
+//        LocalDate calender = LocalDate.of(year,month,1);
+//        int startDay =calender.getDayOfWeek().getValue(); //해당 달의 1일이 무슨 요일인지(월요일:1 ~ 일요일:7)
+//        int endDay = calender.lengthOfMonth(); // 해당 달이 30 or 31 몇일까지 있는지
+//
+//        System.out.println("[" + year + "년 " + month + "월" + "]");
+//        System.out.println("일\t월\t화\t수\t목\t금\t토");
+//    }
+
 
 
     public int show(int day) {
@@ -67,8 +65,14 @@ public class ReserveHandler {
         System.out.println("방사이즈를 선택해주세요");
 
         while (true) {
+            int roomSelect;
+            try {
+                roomSelect = Integer.parseInt(br.readLine());
 
-            int roomSelect = Integer.parseInt(br.readLine());
+            } catch (Exception e) {
+                System.out.println("문자가 아닌 1~3숫자 입력해주세요");
+                continue;
+            }
 
             if (Pattern.matches("^[1-3]$", String.valueOf(roomSelect))) {
                 //선택한 방사이즈 가격
