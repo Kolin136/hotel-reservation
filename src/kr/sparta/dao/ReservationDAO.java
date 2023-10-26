@@ -19,6 +19,7 @@ public class ReservationDAO {
     private static Hotel hotel = new Hotel(managementRoom, reservationList, 50000000); // 호텔 객체
 
 
+
     // 호텔 내부에 있는 방 정보 입력
     public int inputManagementRoom() {
         int month = this.cal.getMonthValue();
@@ -80,7 +81,6 @@ public class ReservationDAO {
 
     // 방 정보 get 메서드
     public Room getRoomInfo()
-
 
     {
         int[] roomNumber = {1,2,3};
