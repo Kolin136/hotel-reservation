@@ -24,8 +24,6 @@ public class ReservationApp {
         //글씨 꾸미기~
         final String ANSI_RESET = "\u001B[0m";
         final String ANSI_YELLOW = "\u001B[33m";
-        //메인 화면 프린트해주고 입력받기 -> 어떤 클래스가 메소드를 가져야하는지
-
 
         ReserveHandler reserveHandler = new ReserveHandler();
         CheckHandler checkHandler = new CheckHandler();
@@ -102,36 +100,30 @@ public class ReservationApp {
                     }
                     //reserveHandler.reserve(name, phoneNumber, DATE, cash); //handler에 지역변수로 저장된 이름, 번호, 날짜, 현금 넘겨주고 원하는 객실 고르게끔
 
-
-                    //reserveHandler.showUuid() 예약번호 보여주기 "
-                    //예약하기
+                    //reserveHandler.showUuid() 예약번호 보여주기
                     break;
                 case 2:
-                    //2f48f241-9d64-4d16-bf56-70b9d4e0e79a
-                    //예약 조회/취소
                     System.out.println(ANSI_YELLOW + "\"예약확인\"" + ANSI_RESET);
                     System.out.println("------------------------------------------------------");
                     System.out.println("예약번호를 입력해주세요.");
                     String customerReservationNumber = in.readLine();
-//                    checkHandler.printMyReservation(customerReservationNumber);
-
-//                    int choice = Integer.parseInt(in.readLine());
-//                    switch (choice) {
-//                        case 1:
-//                            System.out.println("정말 예약을 취소하시겠습니까?");
-//                            System.out.println("1. 예       2. 아니오");
-//                            int number1 = Integer.parseInt(in.readLine());
-//                            switch (number1) {
-//                                case 1:
-//                                    checkHandler.cancleReservation(reservationNumber);
-//                                    break;
-//                                default:
-//                                    break;
-//                            }
-//                        default:
-//                            break;
-//                    }
-//                    break;
+                    checkHandler.printMyReservation(customerReservationNumber);
+                    int choice = Integer.parseInt(in.readLine());
+                    switch (choice) {
+                        case 1:
+                            System.out.println("정말 예약을 취소하시겠습니까?");
+                            System.out.println("1. 예       2. 아니오");
+                            int number1 = Integer.parseInt(in.readLine());
+                            switch (number1) {
+                                case 1:
+                                    checkHandler.cancelReservation(customerReservationNumber);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        default:
+                            break;
+                    }
                     break;
                 case 3:
                     for(int i = 0; i < n; i++) {
