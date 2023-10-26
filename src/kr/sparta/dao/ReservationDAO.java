@@ -15,7 +15,7 @@ public class ReservationDAO {
     private static ArrayList<Reservation> reservationList = new ArrayList<>(); // 예약 담당 객체
     private static ArrayList<Customer> customerDataList = new ArrayList<>(); // 고객 정보 객체
     LocalDate cal = LocalDate.now(); // 현재 요일 받기
-    LocalDateTime localDateTime = LocalDateTime.now(); // UTC
+    LocalDateTime localDateTime; // UTC
     private static Hotel hotel = new Hotel(managementRoom, reservationList, 50000000); // 호텔 객체
 
 
@@ -57,7 +57,7 @@ public class ReservationDAO {
     public ArrayList<Reservation> getReservationList() {
         return reservationList;
     }
-    
+
     // 방정보
     public ArrayList<ManagementRoom> getRoomData() {
         return managementRoom;
@@ -95,13 +95,16 @@ public class ReservationDAO {
         return UUID.randomUUID().toString().substring(0,8);
     }
 
+    public LocalDateTime locaDateCreate(){
+        return LocalDateTime.now();
+    }
+
     //Reservation 객체에 예약정보 입력
     public String inputReserveData ( int roomID, String customerName, String customerPhoneNumber,int day ,long cash)
     {
         String uuid = uuidCreate();
-        hotel.getReservationList().add(new Reservation(roomID, customerName, customerPhoneNumber, localDateTime, day, uuid));
+        hotel.getReservationList().add(new Reservation(roomID, customerName, customerPhoneNumber, locaDateCreate(), day-1, uuid));
         customerDataList.add(new Customer(customerName,customerPhoneNumber,cash,uuid));
-
         hotel.setAssets(cash);
         hotel.getManagementRoom().get(day-1).getReserveDateFlag()[roomID-1] = true;
         hotel.setReservationList(reservationList);
@@ -130,8 +133,6 @@ public class ReservationDAO {
         String phoneNumber ="";
         long cash = 0;
         boolean removeFlag = false;
-
-
         Customer customer = null;
         if(customerDataList.size() == hotel.getReservationList().size())
         {
@@ -149,13 +150,10 @@ public class ReservationDAO {
                     removeFlag = true; // 제거 확인 flag
                     break;
                 }
-
             }
         }
         if(removeFlag)
-        {
             customer = new Customer(name, phoneNumber, cash, uuid);
-        }
         return customer;
     }
 
