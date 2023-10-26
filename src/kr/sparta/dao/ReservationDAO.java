@@ -64,7 +64,7 @@ public class ReservationDAO {
     }
 
     // 방 가격 get메서드
-    public long roomgetPrice(int index)
+    public long getRoomPrice(int index)
     {
         return managementRoom.get(0).getRoomList().getFee()[index-1];
     }

@@ -28,34 +28,34 @@ public class ReserveHandler {
     int n = dao.inputManagementRoom();
 
 
-    public void show(int day) {
+    public int show(int day) {
         //30~31일 모든 일수담긴 리스트 가져오기
-        ArrayList<ManagementRoom> managementRooms= dao.getRoomData();
+        ArrayList<ManagementRoom> managementRooms = dao.getRoomData();
 
         //해당 일 객체만 뽑기
-        ManagementRoom managementRoom = managementRooms.get(day-1);
+        ManagementRoom managementRoom = managementRooms.get(day - 1);
 
         //해당 일의 1~3사이즈방 예약가능,불가 가져오기
-        boolean[] roomCheck =managementRoom.getReserveDateFlag();
+        boolean[] roomCheck = managementRoom.getReserveDateFlag();
 
         //예약 가능 방 가능 필터링 결과
         ArrayList<Integer> roomResult = new ArrayList<>();
 
-        for (int i = 1; i <=roomCheck.length  ; i++) {
-            if(!roomCheck[i-1]){
+        for (int i = 1; i <= roomCheck.length; i++) {
+            if (!roomCheck[i - 1]) {
                 roomResult.add(i);
             }
         }
 
-        System.out.printf("%d일 예약 가능방 목록입니다\n",day);
+        System.out.printf("%d일 예약 가능방 목록입니다\n", day);
         for (int roomSize : roomResult) {
-            String sizeName = managementRoom.getRoomList().getRoomSize()[roomSize-1];
-            System.out.printf("%d. %s\n",roomSize,sizeName );
+            String sizeName = managementRoom.getRoomList().getRoomSize()[roomSize - 1];
+            long sizeFee = managementRoom.getRoomList().getFee()[roomSize - 1];
+            System.out.printf("%d. %s :%d원\n", roomSize, sizeName, sizeFee);
         }
 
-
+        return roomResult.size();
     }
-
 
 
     //예약하기 함수
@@ -71,27 +71,20 @@ public class ReserveHandler {
 
             if (Pattern.matches("^[1-3]$", String.valueOf(roomSelect))) {
                 //선택한 방사이즈 가격
-                long roomPrice = dao.roomgetPrice(roomSelect);
+                long roomPrice = dao.getRoomPrice(roomSelect);
                 //소지금에 따라 예약 가능,불가 처리
                 if (cash - roomPrice >= 0) {
-
                     long wallet = cash - roomPrice;
                     System.out.println("이 정보로 예약하시겠습니까?");
                     System.out.println("성함: " + name);
                     System.out.println("연락처: " + number);
-                    // System.out.println("예약객실: " + reserveHandler.printRoomInfo()); //이게 3이면 Deluxe
-                    //재석님 보고 계세요?? 그러면 이거를 성호님한테 부탁을 드리죠 roomgetSize 이런식으로 인덱스로 방 받게
-                    Room tmpRoom = new Room(new int[]{1, 2, 3},
-                            new String[]{"Standard", "Superior", "Deluxe"},
-                            new long[]{50000L, 100000L, 150000L});
-//                    System.out.println("예약객실: " + dao.getRoomData().get(0).getRoomList().getRoomSize()[roomSelect-1]);
-                    System.out.println("예약객실: " + tmpRoom.getRoomSize()[roomSelect-1]);
+                    System.out.println("예약객실: " + dao.getRoomSize(roomSelect));
                     LocalDate now = LocalDate.now();
                     System.out.println("예약일자: " + now.getYear() + "." + now.getMonthValue() + "." + date);
                     System.out.println("------------------------------------------------------");
                     System.out.println("1. 예약확정                 2. 메인 메뉴로");//간격 tap*5로 통일
                     int option = Integer.parseInt(br.readLine());
-                    if(option == 1) {
+                    if (option == 1) {
                         System.out.println("------------------------------------------------------");
                         String customerUuid = dao.inputReserveData(roomSelect, name, number, date, wallet);
                         System.out.printf("%s님 예약이 완료됐습니다.\n", name);
