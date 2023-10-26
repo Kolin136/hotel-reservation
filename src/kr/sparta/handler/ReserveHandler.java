@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 public class ReserveHandler {
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     ReservationDAO dao = new ReservationDAO();
-    int n = dao.inputManagementRoom();
+
 
 //    public void showAll(int year,int month){
 //        LocalDate calender = LocalDate.of(year,month,1);
