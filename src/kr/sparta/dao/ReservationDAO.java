@@ -133,11 +133,10 @@ public class ReservationDAO {
 
 
         Customer customer = null;
-        if(customerDataList.size() == hotel.getManagementRoom().size())
+        if(customerDataList.size() == hotel.getReservationList().size())
         {
-            for (int i = 0; i < hotel.getManagementRoom().size(); i++) {
+            for (int i = 0; i < hotel.getReservationList().size(); i++) {
                 if(hotel.getReservationList().get(i).getReservationNumber().equals(uuid))
-
                 {
                     hotel.getManagementRoom().get(hotel.getReservationList().get(i).getAccommodationDay()) // 호텔 빈방으로 설정
                             .getReserveDateFlag()[hotel.getReservationList().get(i).getRoomId()-1] = false;
@@ -154,7 +153,9 @@ public class ReservationDAO {
             }
         }
         if(removeFlag)
-             customer = new Customer(name, phoneNumber, cash, uuid);
+        {
+            customer = new Customer(name, phoneNumber, cash, uuid);
+        }
         return customer;
     }
 
