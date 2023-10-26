@@ -1,15 +1,19 @@
 package kr.sparta.handler;
 
 
+import kr.sparta.dao.ReservationDAO;
 import kr.sparta.domain.Hotel;
+import kr.sparta.domain.ManagementRoom;
 import kr.sparta.domain.Reservation;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 /**
  * 예약과 관련된 기능 수행.
@@ -19,34 +23,46 @@ public class ReserveHandler {
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 
-    public Reservation reserve() throws IOException {
-        Reservation reservation;
-        Hotel hotel;
-        String name = br.readLine();
-        String tel = br.readLine();
+    ReservationDAO dao = new ReservationDAO();
 
 
-        //while문안에서 예약일,방 선택후 if문으로 호텔의 ReservationList에서 객체 하나하나 보면서 중복 예약일,방 있으면 다시
-        //while문 첫줄 실행하고 중복없으면  Reservation 생성후 리턴
+    public void show() {
+        ArrayList<ManagementRoom> managementRooms= dao.returnRoomData();
 
 
-        // 예약하기 작업후 룸날짜,정보 결정후 예약하기 생성자 매개변수에 넣어준다.
-        // reservation = new Reservation(rommId, name, tel, date, reservationNumber);
-
-        //return reservation;
     }
 
-//    public void 객체 UUID 입력 메서드(String UUID제외한 개인정보 )
-//    {
-//        //예약정보
-//        //UUID.getUUID(uuid)
-//        //  DAO 데이터 send
-        // reservation데이터 넣어주고
-    // DAO send (String UUID제외한 개인정보)
-    // inputReserveData
-//    }
 
 
+    //예약하기 함수
+    public void reserve(String name, String number, long cash, int date) throws IOException {
+        //예약가능 목록
+        //DateList dateList=new DateList();
+
+        System.out.println("방사이즈를 선택해주세요");
+
+        while (true) {
+
+            int roomSelect = Integer.parseInt(br.readLine());
+
+            if (Pattern.matches("^[1-3]$", String.valueOf(roomSelect))) {
+                //선택한 방사이즈 가격
+                long roomPrice = dao.RoomgetPrice(roomSelect);
+                //소지금에 따라 예약 가능,불가 처리
+                if (cash - roomPrice >= 0) {
+                    long wallet = cash - roomPrice;
+                    dao.inputReserveData(roomSelect, name, number, date, wallet);
+                    System.out.printf("%s님 예약이 완료됐습니다.\n", name);
+                    break;
+                } else {
+                    System.out.println("금액이 부족합니다. 방사이즈 다시 선택해주세요");
+                }
+
+            } else {
+                System.out.println("1~3사이즈 입력해주세요");
+            }
+        }
+    }
 
 
 
