@@ -72,6 +72,7 @@ public class ReservationDAO {
         return managementRoom.get(0).getRoomList().getRoomSize()[index - 1];
     }
 
+
     // 방 번호 get메서드
     public int getRoomNumber(int index) {
         return managementRoom.get(0).getRoomList().getRoomID()[index - 1];
@@ -79,6 +80,8 @@ public class ReservationDAO {
 
     // 방 정보 get 메서드
     public Room getRoomInfo()
+
+
     {
         int[] roomNumber = {1,2,3};
         String[] roomSize = {"Standard", "Superior", "Deluxe"};
@@ -128,11 +131,13 @@ public class ReservationDAO {
         long cash = 0;
         boolean removeFlag = false;
 
+
         Customer customer = null;
         if(customerDataList.size() == hotel.getManagementRoom().size())
         {
             for (int i = 0; i < hotel.getManagementRoom().size(); i++) {
                 if(hotel.getReservationList().get(i).getReservationNumber().equals(uuid))
+
                 {
                     hotel.getManagementRoom().get(hotel.getReservationList().get(i).getAccommodationDay()) // 호텔 빈방으로 설정
                             .getReserveDateFlag()[hotel.getReservationList().get(i).getRoomId()-1] = false;
@@ -145,6 +150,7 @@ public class ReservationDAO {
                     removeFlag = true; // 제거 확인 flag
                     break;
                 }
+
             }
         }
         if(removeFlag)
