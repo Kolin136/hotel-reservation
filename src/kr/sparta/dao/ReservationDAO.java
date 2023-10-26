@@ -66,7 +66,7 @@ public class ReservationDAO {
     // 방 가격 get메서드
     public long roomgetPrice(int index)
     {
-        return managementRoom.get(0).getRoomList().getFee()[index];
+        return managementRoom.get(0).getRoomList().getFee()[index-1];
     }
 
     // uuid random 생성 메서드
@@ -76,15 +76,16 @@ public class ReservationDAO {
     }
 
     //Reservation 객체에 예약정보 입력
-    public void inputReserveData ( int roomID, String customerName, String customerPhoneNumber,int day ,long cash)
+    public String inputReserveData ( int roomID, String customerName, String customerPhoneNumber,int day ,long cash)
     {
         String uuid = uuidCreate();
         hotel.getReservationList().add(new Reservation(roomID, customerName, customerPhoneNumber, localDateTime, day, uuid));
         this.customerDataList.add(new Customer(customerName,customerPhoneNumber,cash,uuid));
 
         hotel.setAssets(cash);
-        hotel.getManagementRoom().get(day).getReserveDateFlag()[roomID] = true;
+        hotel.getManagementRoom().get(day-1).getReserveDateFlag()[roomID-1] = true;
         this.hotel.setReservationList(this.reservationList);
+        return uuid;
     }
 
     //     고객은 자신의 예약 목록을 조회
@@ -111,7 +112,7 @@ public class ReservationDAO {
             {
                 hotel.getReservationList().remove(i);
                 hotel.getManagementRoom().get(hotel.getReservationList().get(i).getAccommodationDay())
-                        .getReserveDateFlag()[hotel.getReservationList().get(i).getRoomId()] = false;
+                        .getReserveDateFlag()[hotel.getReservationList().get(i).getRoomId()-1] = false;
                 removeFlag = true;
                 break;
             }
