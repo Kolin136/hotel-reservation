@@ -10,9 +10,7 @@ public class Hotel {
     private ArrayList<Reservation> reservationList; // 예약 정보 리스트
     protected ArrayList<ManagementRoom> managementRoom;
 
-
-
-    private long assets = 50000000L; // 자산 5천마넌 시작
+    private long assets; // 자산 5천마넌 시작
     public Hotel(ArrayList<ManagementRoom> managementRoom, ArrayList<Reservation> reservationList, long assets){
         this.managementRoom = managementRoom;
         this.reservationList = reservationList;
@@ -48,6 +46,6 @@ public class Hotel {
     }
 
     public void setAssets(long assets) {
-        this.assets = assets;
+        this.assets += assets;
     }
 }
