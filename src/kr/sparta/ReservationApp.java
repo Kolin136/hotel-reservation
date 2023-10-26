@@ -44,7 +44,6 @@ public class ReservationApp {
             System.out.println("------------------------------------------------------");
             System.out.println("1. 예약하기");
             System.out.println("2. 예약확인/취소");
-            System.out.println("3. 방 현황 확인");
             String customerName, customerPhoneNumber;
             int day = 0;
             long cash;
