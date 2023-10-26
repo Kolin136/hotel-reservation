@@ -81,7 +81,6 @@ public class ReservationDAO {
 
     // 방 정보 get 메서드
     public Room getRoomInfo()
-
     {
         int[] roomNumber = {1,2,3};
         String[] roomSize = {"Standard", "Superior", "Deluxe"};
