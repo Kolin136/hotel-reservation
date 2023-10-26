@@ -66,17 +66,16 @@ public class ReservationDAO {
     // 방 가격 get메서드
     public long roomgetPrice(int index)
     {
-        return managementRoom.get(0).getRoomList().getFee()[index];
+        return managementRoom.get(0).getRoomList().getFee()[index-1];
     }
 
     // uuid random 생성 메서드
     public String uuidCreate(){
-        String uuid = UUID.randomUUID().toString().substring(0,8);
-        return uuid;
+        return UUID.randomUUID().toString().substring(0,8);
     }
 
     //Reservation 객체에 예약정보 입력
-    public void inputReserveData ( int roomID, String customerName, String customerPhoneNumber,int day ,long cash)
+    public String inputReserveData ( int roomID, String customerName, String customerPhoneNumber,int day ,long cash)
     {
         String uuid = uuidCreate();
         hotel.getReservationList().add(new Reservation(roomID, customerName, customerPhoneNumber, localDateTime, day, uuid));
@@ -85,6 +84,7 @@ public class ReservationDAO {
         hotel.setAssets(cash);
         hotel.getManagementRoom().get(day-1).getReserveDateFlag()[roomID-1] = true;
         this.hotel.setReservationList(this.reservationList);
+        return uuid;
     }
 
     //     고객은 자신의 예약 목록을 조회
@@ -104,19 +104,45 @@ public class ReservationDAO {
     }
 
     // 예약제거
-    public boolean reservationRemove(String uuid){
-        boolean removeFlag= false;
-        for (int i = 0; i < hotel.getReservationList().size(); i++) {
+    public Customer reservationRemove(String uuid){
+        String name= "";
+        String phoneNumber ="";
+        long cash = 0;
+        long roomcash=0;
+        boolean removeHotelUserFlag = false;
+        boolean removeUserFlag = false;
+        Customer customer = null;
+        int hotelListSize = hotel.getReservationList().size();
+        for (int i = 0; i < hotelListSize; i++) {
             if(hotel.getReservationList().get(i).getReservationNumber().equals(uuid))
             {
-                hotel.getReservationList().remove(i);
                 hotel.getManagementRoom().get(hotel.getReservationList().get(i).getAccommodationDay())
                         .getReserveDateFlag()[hotel.getReservationList().get(i).getRoomId()-1] = false;
-                removeFlag = true;
-                break;
+
+
+
+                roomcash = hotel.getManagementRoom().get(i).getRoomList().getFee()[hotel.getReservationList().get(i).getRoomId()-1];
+                hotel.getReservationList().remove(i);
+                removeHotelUserFlag = true;
+            }
+            if(i < customerDataList.size()){
+                if(customerDataList.get(i).equals(uuid))
+                {
+                    name = customerDataList.get(i).getName();
+                    phoneNumber = customerDataList.get(i).getPhoneNumber();
+                    cash = customerDataList.get(i).getCash() +roomcash;
+                    customerDataList.remove(i);
+                    removeUserFlag = true;
+                    hotelListSize--;
+                    i--;
+                }
+
+
             }
         }
-        return removeFlag;
+        if(removeHotelUserFlag && removeUserFlag)
+             customer = new Customer(name, phoneNumber, cash, uuid);
+        return customer;
     }
 
 

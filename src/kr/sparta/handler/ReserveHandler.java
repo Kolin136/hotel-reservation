@@ -5,6 +5,7 @@ import kr.sparta.dao.ReservationDAO;
 import kr.sparta.domain.Hotel;
 import kr.sparta.domain.ManagementRoom;
 import kr.sparta.domain.Reservation;
+import kr.sparta.domain.Room;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,6 +25,7 @@ public class ReserveHandler {
 
 
     ReservationDAO dao = new ReservationDAO();
+    int n = dao.inputManagementRoom();
 
 
     public void show(int day) {
@@ -51,6 +53,7 @@ public class ReserveHandler {
             System.out.printf("%d. %s\n",roomSize,sizeName );
         }
 
+
     }
 
 
@@ -73,8 +76,30 @@ public class ReserveHandler {
                 if (cash - roomPrice >= 0) {
 
                     long wallet = cash - roomPrice;
-                    dao.inputReserveData(roomSelect, name, number, date, wallet);
-                    System.out.printf("%s님 예약이 완료됐습니다.\n", name);
+                    System.out.println("이 정보로 예약하시겠습니까?");
+                    System.out.println("성함: " + name);
+                    System.out.println("연락처: " + number);
+                    // System.out.println("예약객실: " + reserveHandler.printRoomInfo()); //이게 3이면 Deluxe
+                    //재석님 보고 계세요?? 그러면 이거를 성호님한테 부탁을 드리죠 roomgetSize 이런식으로 인덱스로 방 받게
+                    Room tmpRoom = new Room(new int[]{1, 2, 3},
+                            new String[]{"Standard", "Superior", "Deluxe"},
+                            new long[]{50000L, 100000L, 150000L});
+//                    System.out.println("예약객실: " + dao.getRoomData().get(0).getRoomList().getRoomSize()[roomSelect-1]);
+                    System.out.println("예약객실: " + tmpRoom.getRoomSize()[roomSelect-1]);
+                    LocalDate now = LocalDate.now();
+                    System.out.println("예약일자: " + now.getYear() + "." + now.getMonthValue() + "." + date);
+                    System.out.println("------------------------------------------------------");
+                    System.out.println("1. 예약확정                 2. 메인 메뉴로");//간격 tap*5로 통일
+                    int option = Integer.parseInt(br.readLine());
+                    if(option == 1) {
+                        System.out.println("------------------------------------------------------");
+                        String customerUuid = dao.inputReserveData(roomSelect, name, number, date, wallet);
+                        System.out.printf("%s님 예약이 완료됐습니다.\n", name);
+                        System.out.println("------------------------------------------------------");
+                        System.out.println(customerUuid);
+                        System.out.println("위 예약번호를 기억해주세요!");
+                        System.out.println("------------------------------------------------------");
+                    }
                     break;
                 } else {
                     System.out.println("금액이 부족합니다. 방사이즈 다시 선택해주세요");
@@ -85,7 +110,4 @@ public class ReserveHandler {
             }
         }
     }
-
-
-
 }
