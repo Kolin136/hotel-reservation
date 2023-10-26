@@ -13,36 +13,41 @@ public class ReservationDAO {
     private ArrayList<Reservation> reservationList = new ArrayList<>();
     private ArrayList<Customer> customerDataList = new ArrayList<>();
     LocalDate cal = LocalDate.now(); // 현재 요일 받기
-    protected Hotel hotel;
+    private Hotel hotel = new Hotel(managementRoom,reservationList,50000000);
 
 
     // 호텔 내부에 있는 방 정보 입력
-    public void inputManagementRoom() {
-        int month = this.cal.getDayOfMonth();
-        int inputmonth = 0;
+    public int inputManagementRoom() {
+        int month = this.cal.getMonthValue();
+        int inputmonthofDay = 0;
         switch (month) {
-            case 1 -> inputmonth = 31;
-            case 2 -> inputmonth = 29;
-            case 3 -> inputmonth = 31;
-            case 4 -> inputmonth = 30;
-            case 5 -> inputmonth = 31;
-            case 6 -> inputmonth = 30;
-            case 7 -> inputmonth = 31;
-            case 8 -> inputmonth = 31;
-            case 9 -> inputmonth = 30;
-            case 10 -> inputmonth = 31;
-            case 11 -> inputmonth = 30;
-            case 12 -> inputmonth = 31;
+            case 1 -> inputmonthofDay = 31;
+            case 2 -> inputmonthofDay = 29;
+            case 3 -> inputmonthofDay = 31;
+            case 4 -> inputmonthofDay = 30;
+            case 5 -> inputmonthofDay = 31;
+            case 6 -> inputmonthofDay = 30;
+            case 7 -> inputmonthofDay = 31;
+            case 8 -> inputmonthofDay = 31;
+            case 9 -> inputmonthofDay = 30;
+            case 10 -> inputmonthofDay = 31;
+            case 11 -> inputmonthofDay = 30;
+            case 12 -> inputmonthofDay = 31;
         }
-        for (int i = 0; i < inputmonth; i++) {
+        for (int i = 0; i < inputmonthofDay; i++) {
             this.managementRoom.add(new ManagementRoom(new boolean[]{false, false, false}
                     ,new Room(new int[]{1, 2, 3},
                     new String[]{"Standard", "Superior", "Deluxe"},
                     new long[]{50000L, 100000L, 150000L})));
         }
         this.hotel.setManagementRoom(this.managementRoom);
+        return inputmonthofDay;
     }
 
+    // 호텔 정보
+    public Hotel getHotel(){
+        return hotel;
+    }
 
     // 예약 정보 출력
     public ArrayList<Reservation> getReservationList ()
@@ -50,27 +55,33 @@ public class ReservationDAO {
         return this.reservationList;
     }
 
-    public void add (Reservation reservation)
-    {
-        this.reservationList.add(reservation);
-
-    }
-
-
-//    public Hotel getHotelInfo(Hotel hotel)
-//    {
-//        return hotel;
-//    }
 
     // 방정보 출력
-    public ManagementRoom returnRoomData(int index){
-        return this.managementRoom.get(index);
+    public ArrayList<ManagementRoom> getRoomData(){
+        return this.managementRoom;
     }
 
-    //객체에 예약정보 입력
-    public void inputReserveData ( int roomID, String roomSize,int fee,int day)
-    {
 
+    // 방 가격 get메서드
+    public long roomgetPrice(int index)
+    {
+        return managementRoom.get(0).getRoomList().getFee()[index];
+    }
+
+    // uuid random 생성 메서드
+    public String uuidCreate(){
+        String uuid = UUID.randomUUID().toString().substring(0,8);
+        return uuid;
+    }
+
+    //Reservation 객체에 예약정보 입력
+    public void inputReserveData ( int roomID, String customerName, String customerPhoneNumber,int day ,long cash)
+    {
+        this.reservationList.add(new Reservation(roomID, customerName, customerPhoneNumber,cal, uuidCreate()));
+        this.customerDataList.add(new Customer(customerName,customerPhoneNumber,cash -roomgetPrice(roomID),uuidCreate()));
+        hotel.setAssets(cash);
+        managementRoom.get(day).getReserveDateFlag()[roomID] = true;
+        this.hotel.setReservationList(this.reservationList);
     }
 
     //     고객은 자신의 예약 목록을 조회

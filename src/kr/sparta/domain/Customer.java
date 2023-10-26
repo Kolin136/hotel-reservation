@@ -5,12 +5,12 @@ import java.util.UUID;
 public class Customer {
     private String name; //이름
     private String phoneNumber; //전화번호(XXX-XXXX-XXXX)정규표현식
-    private int cash;
+    private long cash;
 
     private String uuid;
 
 
-    public Customer(String name, String phoneNumber, int cash,String uuid) {
+    public Customer(String name, String phoneNumber, long cash,String uuid) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.cash = cash;
