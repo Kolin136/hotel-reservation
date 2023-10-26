@@ -5,6 +5,7 @@ import kr.sparta.domain.Reservation;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
 
 public class CheckHandler {
 
@@ -16,17 +17,20 @@ public class CheckHandler {
         return reservation;
     }
 
-    public void printMyReservation(String reservationId) throws IOException {
+    public void printMyReservation(String reservationId) {
         Reservation reservation = getReservation(reservationId);
         if (reservation != null) {
-            System.out.println("예약하신 내역입니다.");
+            LocalDate now = LocalDate.now();
+            System.out.println("[ 예약하신 내역입니다. ]");
+            System.out.println();
             System.out.println("예약 번호: " + reservationId);
             System.out.println("성함: " + reservation.getCustomerName());
             System.out.println("연락처: " + reservation.getCustomerPhoneNumber());
             System.out.println("예약객실: " + reservation.getRoomId());
-            System.out.println("예약일자: " + reservation.getAccommodationDay());
+            System.out.println("예약일자: " + now.getYear() + "." + now.getMonthValue() + "." + reservation.getAccommodationDay());
+            System.out.println();
             while (true) {
-                System.out.println("1. 뒤로가기  2.취소하기");
+                System.out.println("1. 뒤로가기                 2. 취소하기");//간격 tap*5로 통일
 
                 int choice = getNumber();
                 if (choice == 1) {
