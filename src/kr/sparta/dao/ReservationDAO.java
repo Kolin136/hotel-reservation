@@ -76,7 +76,7 @@ public class ReservationDAO {
     //Reservation 객체에 예약정보 입력
     public void inputReserveData ( int roomID, String customerName, String customerPhoneNumber,int day ,long cash)
     {
-        this.reservationList.add(new Reservation(roomID, customerName, customerPhoneNumber,cal, uuidCreate()));
+        this.reservationList.add(new Reservation(roomID, customerName, customerPhoneNumber, cal, uuidCreate()));
         this.customerDataList.add(new Customer(customerName,customerPhoneNumber,cash -roomgetPrice(roomID),uuidCreate()));
         hotel.setAssets(cash);
         managementRoom.get(day).getReserveDateFlag()[roomID] = true;

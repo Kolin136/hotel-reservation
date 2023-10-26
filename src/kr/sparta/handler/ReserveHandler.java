@@ -34,6 +34,7 @@ public class ReserveHandler {
         // reservation = new Reservation(rommId, name, tel, date, reservationNumber);
 
         //return reservation;
+        return null;
     }
 
 //    public void 객체 UUID 입력 메서드(String UUID제외한 개인정보 )

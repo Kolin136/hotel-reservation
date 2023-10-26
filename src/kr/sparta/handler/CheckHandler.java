@@ -42,19 +42,19 @@ public class CheckHandler {
     }
 
     //그냥 스태틱하게 화면만 보여주는 부분이랑 사용자에 입력에 따라 다른 정보를 보여줘야하는 부분을 분리시키면 어떨까.
-    public void printMyReservation() {
-        int reservationId = getNumber();
-        Reservation reservation = getReservation(reservationId);
-        System.out.println("예약하신 내역입니다." + reservation);
-        System.out.println("1. 뒤로가기  2.취소하기");
-        //reservationId 다음으로 전달해주기.
-        int choice = getNumber();
-        if(choice == 1) {
-            return;
-        } else if(choice == 2) {
-            cancleReservation(reservation);
-        }
-    }
+//    public void printMyReservation() {
+//        int reservationId = getNumber();
+//        Reservation reservation = getReservation(reservationId);
+//        System.out.println("예약하신 내역입니다." + reservation);
+//        System.out.println("1. 뒤로가기  2.취소하기");
+//        //reservationId 다음으로 전달해주기.
+//        int choice = getNumber();
+//        if(choice == 1) {
+//            return;
+//        } else if(choice == 2) {
+//            cancleReservation(reservation);
+//        }
+//    }
 
     public void cancleReservation(String reservationId) {
         //dao.cancleReservation(reservationId);
@@ -62,6 +62,4 @@ public class CheckHandler {
         //reservationList에서 cancleFlag를 true로 해도 되고
         //reservationList에서 해당 객체를 삭제하는 것도 되고.
     }
-
-
 }
