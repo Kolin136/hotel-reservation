@@ -3,6 +3,7 @@ package kr.sparta.dao;
 import kr.sparta.domain.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class ReservationDAO {
@@ -13,6 +14,7 @@ public class ReservationDAO {
     private ArrayList<Reservation> reservationList = new ArrayList<>();
     private ArrayList<Customer> customerDataList = new ArrayList<>();
     LocalDate cal = LocalDate.now(); // 현재 요일 받기
+    LocalDateTime localDateTime = LocalDateTime.now(); // UTC
     private Hotel hotel = new Hotel(managementRoom,reservationList,50000000);
 
 
@@ -55,11 +57,11 @@ public class ReservationDAO {
         return this.reservationList;
     }
 
+
     // 방정보 출력
     public ArrayList<ManagementRoom> getRoomData(){
         return this.managementRoom;
     }
-
 
     // 방 가격 get메서드
     public long roomgetPrice(int index)
@@ -76,29 +78,46 @@ public class ReservationDAO {
     //Reservation 객체에 예약정보 입력
     public void inputReserveData ( int roomID, String customerName, String customerPhoneNumber,int day ,long cash)
     {
-        this.reservationList.add(new Reservation(roomID, customerName, customerPhoneNumber, cal, uuidCreate()));
-        this.customerDataList.add(new Customer(customerName,customerPhoneNumber,cash -roomgetPrice(roomID),uuidCreate()));
+        String uuid = uuidCreate();
+        hotel.getReservationList().add(new Reservation(roomID, customerName, customerPhoneNumber, localDateTime, day, uuid));
+        this.customerDataList.add(new Customer(customerName,customerPhoneNumber,cash,uuid));
+
         hotel.setAssets(cash);
-        managementRoom.get(day).getReserveDateFlag()[roomID] = true;
+        hotel.getManagementRoom().get(day).getReserveDateFlag()[roomID] = true;
         this.hotel.setReservationList(this.reservationList);
     }
 
     //     고객은 자신의 예약 목록을 조회
-    public Reservation getInquiry (String inquiry)
+    public Reservation getInquiry (String uuid)
     {
         int index = 0;
         boolean flag = false;
         //String uuid
-        for (int i = 0; i < this.reservationList.size(); i++) {
-            if (inquiry.equals(this.reservationList.get(i).getReservationNumber())) {
+        for (int i = 0; i < hotel.getReservationList().size(); i++) {
+            if (uuid.equals(hotel.getReservationList().get(i).getReservationNumber())) {
                 index = i;
                 flag = true;
                 break;
             }
         }
-        if (flag)
-            return reservationList.get(index);
-        else return null;
+        return flag? hotel.getReservationList().get(index):null;
     }
+
+    // 예약제거
+    public boolean reservationRemove(String uuid){
+        boolean removeFlag= false;
+        for (int i = 0; i < hotel.getReservationList().size(); i++) {
+            if(hotel.getReservationList().get(i).getReservationNumber().equals(uuid))
+            {
+                hotel.getReservationList().remove(i);
+                hotel.getManagementRoom().get(hotel.getReservationList().get(i).getAccommodationDay())
+                        .getReserveDateFlag()[hotel.getReservationList().get(i).getRoomId()] = false;
+                removeFlag = true;
+                break;
+            }
+        }
+        return removeFlag;
+    }
+
 
 }

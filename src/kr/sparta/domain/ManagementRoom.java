@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ManagementRoom {
 
-    final boolean[] reserveDateFlag = new boolean[3]; //예약 확인
+    final boolean[] reserveDateFlag = new boolean[3]; //예약 확인 false 예약x ture 예약o
     protected Room roomList; // 룸 정보
 
     public ManagementRoom(boolean[] reserveDateFlag, Room roomList)
