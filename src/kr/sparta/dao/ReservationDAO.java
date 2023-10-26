@@ -130,8 +130,7 @@ public class ReservationDAO {
                     cash = customerDataList.get(i).getCash() +roomcash;
                     customerDataList.remove(i);
                     removeUserFlag = true;
-                    hotelListSize--;
-                    i--;
+                    break;
                 }
             }
         }
