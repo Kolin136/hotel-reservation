@@ -81,6 +81,7 @@ public class ReservationDAO {
         String uuid = uuidCreate();
         hotel.getReservationList().add(new Reservation(roomID, customerName, customerPhoneNumber, localDateTime, day, uuid));
         this.customerDataList.add(new Customer(customerName,customerPhoneNumber,cash,uuid));
+
         hotel.setAssets(cash);
         hotel.getManagementRoom().get(day).getReserveDateFlag()[roomID] = true;
         this.hotel.setReservationList(this.reservationList);
