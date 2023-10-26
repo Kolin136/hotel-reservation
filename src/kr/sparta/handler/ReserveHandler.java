@@ -15,15 +15,23 @@ public class ReserveHandler {
     ReservationDAO dao = new ReservationDAO();
 
 
-//    public void showAll(int year,int month){
-//        LocalDate calender = LocalDate.of(year,month,1);
-//        int startDay =calender.getDayOfWeek().getValue(); //해당 달의 1일이 무슨 요일인지(월요일:1 ~ 일요일:7)
+
+//    public void showAll(int year, int month) {
+//        LocalDate calender = LocalDate.of(year, month, 1);
+//        int startDay = calender.getDayOfWeek().getValue(); //해당 달의 1일이 무슨 요일인지(월요일:1 ~ 일요일:7)
 //        int endDay = calender.lengthOfMonth(); // 해당 달이 30 or 31 몇일까지 있는지
 //
 //        System.out.println("[" + year + "년 " + month + "월" + "]");
 //        System.out.println("일\t월\t화\t수\t목\t금\t토");
+//
+//        for (int k = 1; k <= endDay; k++) {
+//            System.out.printf("%02d\t", k);
+//            if (k % 7 == 0) {
+//                System.out.println();
+//            }
+//
+//        }
 //    }
-
 
 
     public int show(int day) {
