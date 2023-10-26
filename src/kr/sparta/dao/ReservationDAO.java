@@ -95,12 +95,15 @@ public class ReservationDAO {
         return UUID.randomUUID().toString().substring(0,8);
     }
 
+    public LocalDateTime locaDateCreate(){
+        return LocalDateTime.now();
+    }
+
     //Reservation 객체에 예약정보 입력
     public String inputReserveData ( int roomID, String customerName, String customerPhoneNumber,int day ,long cash)
     {
-        localDateTime = LocalDateTime.now();
         String uuid = uuidCreate();
-        hotel.getReservationList().add(new Reservation(roomID, customerName, customerPhoneNumber, localDateTime, day-1, uuid));
+        hotel.getReservationList().add(new Reservation(roomID, customerName, customerPhoneNumber, locaDateCreate(), day-1, uuid));
         customerDataList.add(new Customer(customerName,customerPhoneNumber,cash,uuid));
         hotel.setAssets(cash);
         hotel.getManagementRoom().get(day-1).getReserveDateFlag()[roomID-1] = true;

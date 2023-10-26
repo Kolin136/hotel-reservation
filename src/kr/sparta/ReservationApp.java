@@ -79,7 +79,7 @@ public class ReservationApp {
                     System.out.println("------------------------------------------------------");
                     System.out.println("전화번호를 입력해주세요.(XXX-XXXX-XXXX)");
                     while(true) {
-                        customerPhoneNumber = sc.next();
+                        customerPhoneNumber = sc.nextLine();
                         if(Pattern.matches(phoneNumberPattern,customerPhoneNumber)) {
                             break;
                         } else {
@@ -129,7 +129,7 @@ public class ReservationApp {
                     System.out.println(ANSI_YELLOW + "\"예약확인\"" + ANSI_RESET);
                     System.out.println("------------------------------------------------------");
                     System.out.println("예약번호를 입력해주세요.");
-                    String customerReservationNumber = sc.next();
+                    String customerReservationNumber = sc.nextLine();
                     checkHandler.printMyReservation(customerReservationNumber);
                     break;
                 case 9:
