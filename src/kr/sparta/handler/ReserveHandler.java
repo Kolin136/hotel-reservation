@@ -26,9 +26,30 @@ public class ReserveHandler {
     ReservationDAO dao = new ReservationDAO();
 
 
-    public void show() {
-        ArrayList<ManagementRoom> managementRooms= dao.returnRoomData();
+    public void show(long cash,int day) {
+        //30~31일 모든 일수담긴 리스트 가져오기
+        ArrayList<ManagementRoom> managementRooms= dao.getRoomData();
 
+        //해당 일 객체만 뽑기
+        ManagementRoom managementRoom = managementRooms.get(day-1);
+
+        //해당 일의 1~3사이즈방 예약가능,불가 가져오기
+        boolean[] roomCheck =managementRoom.getReserveDateFlag();
+
+        //예약 가능 방 가능 필터링 결과
+        ArrayList<Integer> roomResult = new ArrayList<>();
+
+        for (int i = 1; i <=roomCheck.length  ; i++) {
+            if(!roomCheck[i-1]){
+                roomResult.add(i);
+            }
+        }
+
+        System.out.printf("%d일 예약 가능방 목록입니다\n",day);
+        for (int roomSize : roomResult) {
+            String sizeName = managementRoom.getRoomList().getRoomSize()[roomSize-1];
+            System.out.printf("%d. %s\n",roomSize,sizeName );
+        }
 
     }
 
@@ -47,7 +68,7 @@ public class ReserveHandler {
 
             if (Pattern.matches("^[1-3]$", String.valueOf(roomSelect))) {
                 //선택한 방사이즈 가격
-                long roomPrice = dao.RoomgetPrice(roomSelect);
+                long roomPrice = dao.roomgetPrice(roomSelect);
                 //소지금에 따라 예약 가능,불가 처리
                 if (cash - roomPrice >= 0) {
                     long wallet = cash - roomPrice;

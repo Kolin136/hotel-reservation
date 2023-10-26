@@ -41,7 +41,7 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
-    public int getCash() {
+    public long getCash() {
         return cash;
     }
 
