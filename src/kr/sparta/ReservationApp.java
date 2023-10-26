@@ -108,8 +108,8 @@ public class ReservationApp {
                     }
                     break;
                 case 3:
+                    ArrayList<ManagementRoom> mRoomList = dao.getRoomData();
                     for(int i = 0; i < n; i++) {
-                        ArrayList<ManagementRoom> mRoomList = dao.getRoomData();
                         ManagementRoom mRoom = mRoomList.get(i);
                         System.out.println("Day" + i);
                         Room tmp = mRoom.getRoomList();
