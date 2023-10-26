@@ -57,7 +57,7 @@ public class ReservationDAO {
     public ArrayList<Reservation> getReservationList() {
         return reservationList;
     }
-    
+
     // 방정보
     public ArrayList<ManagementRoom> getRoomData() {
         return managementRoom;
@@ -130,8 +130,6 @@ public class ReservationDAO {
         String phoneNumber ="";
         long cash = 0;
         boolean removeFlag = false;
-
-
         Customer customer = null;
         if(customerDataList.size() == hotel.getReservationList().size())
         {
@@ -149,13 +147,10 @@ public class ReservationDAO {
                     removeFlag = true; // 제거 확인 flag
                     break;
                 }
-
             }
         }
         if(removeFlag)
-        {
             customer = new Customer(name, phoneNumber, cash, uuid);
-        }
         return customer;
     }
 
