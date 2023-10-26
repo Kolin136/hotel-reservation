@@ -71,7 +71,7 @@ public class ReserveHandler {
 
             if (Pattern.matches("^[1-3]$", String.valueOf(roomSelect))) {
                 //선택한 방사이즈 가격
-                long roomPrice = dao.roomgetPrice(roomSelect);
+                long roomPrice = dao.getRoomPrice(roomSelect);
                 //소지금에 따라 예약 가능,불가 처리
                 if (cash - roomPrice >= 0) {
                     long wallet = cash - roomPrice;
