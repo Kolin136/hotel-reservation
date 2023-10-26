@@ -55,6 +55,7 @@ public class ReservationDAO {
         return this.reservationList;
     }
 
+
     // 방정보 출력
     public ArrayList<ManagementRoom> getRoomData(){
         return this.managementRoom;
