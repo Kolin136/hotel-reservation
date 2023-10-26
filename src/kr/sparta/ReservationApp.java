@@ -46,6 +46,8 @@ public class ReservationApp {
             int day = 0;
             int cash;
             switch (number) {
+                case 0:
+
                 case 1:
                     System.out.println("------------------------------------------------------");
                     System.out.println("9발업 저글링 HOTEL 예약하기");
