@@ -69,4 +69,16 @@ public class Reservation {
     public void setReservationNumber(String reservationNumber) {
         this.reservationNumber = reservationNumber;
     }
+
+    @Override
+    public String toString() {
+        return "Reservation{" +
+                "roomId=" + roomId +
+                ", customerName='" + customerName + '\'' +
+                ", customerPhoneNumber='" + customerPhoneNumber + '\'' +
+                ", date=" + date +
+                ", accommodationDay=" + accommodationDay +
+                ", reservationNumber='" + reservationNumber + '\'' +
+                '}';
+    }
 }

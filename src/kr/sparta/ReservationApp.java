@@ -46,6 +46,8 @@ public class ReservationApp {
             int day = 0;
             int cash;
             switch (number) {
+                case 0:
+
                 case 1:
                     System.out.println("------------------------------------------------------");
                     System.out.println("9발업 저글링 HOTEL 예약하기");
@@ -89,27 +91,10 @@ public class ReservationApp {
                     System.out.println("예약번호를 입력해주세요.");
                     String customerReservationNumber = in.readLine();
                     checkHandler.printMyReservation(customerReservationNumber);
-                    int choice = Integer.parseInt(in.readLine());
-                    switch (choice) {
-                        case 1:
-                            System.out.println("정말 예약을 취소하시겠습니까?");
-                            System.out.println("1. 예       2. 아니오");
-                            int number1 = Integer.parseInt(in.readLine());
-                            switch (number1) {
-                                case 1:
-                                    checkHandler.cancelReservation(customerReservationNumber);
-                                    break;
-                                default:
-                                    break;
-                            }
-                            break;
-                        default:
-                            break;
-                    }
                     break;
                 case 3:
+                    ArrayList<ManagementRoom> mRoomList = dao.getRoomData();
                     for(int i = 0; i < n; i++) {
-                        ArrayList<ManagementRoom> mRoomList = dao.getRoomData();
                         ManagementRoom mRoom = mRoomList.get(i);
                         System.out.println("Day" + i);
                         Room tmp = mRoom.getRoomList();
