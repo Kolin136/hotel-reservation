@@ -1,9 +1,7 @@
 package kr.sparta.handler;
 
 import kr.sparta.dao.ReservationDAO;
-import kr.sparta.domain.Customer;
 import kr.sparta.domain.Reservation;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,7 +9,6 @@ import java.io.InputStreamReader;
 public class CheckHandler {
 
     BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-
     ReservationDAO dao = new ReservationDAO();
 
     public Reservation getReservation(String reservationId) {
@@ -61,7 +58,7 @@ public class CheckHandler {
             System.out.println("1.예    2.아니오");
             int choice = getNumber();
             if (choice == 1) {
-                Customer customer = dao.reservationRemove(reservationId);
+                dao.reservationRemove(reservationId);
                 System.out.println("취소가 완료되었습니다.");
                 break;
             } else if (choice == 2) {

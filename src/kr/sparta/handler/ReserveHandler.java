@@ -1,29 +1,17 @@
 package kr.sparta.handler;
 
-
 import kr.sparta.dao.ReservationDAO;
-import kr.sparta.domain.Hotel;
 import kr.sparta.domain.ManagementRoom;
-import kr.sparta.domain.Reservation;
-import kr.sparta.domain.Room;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.UUID;
 import java.util.regex.Pattern;
 
-/**
- * 예약과 관련된 기능 수행.
- * 해야하는 역할 정보를 입력받아서 객체 생성.
- */
+
 public class ReserveHandler {
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-
     ReservationDAO dao = new ReservationDAO();
     int n = dao.inputManagementRoom();
 

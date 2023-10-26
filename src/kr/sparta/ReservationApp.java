@@ -1,12 +1,11 @@
 package kr.sparta;
 
-//import kr.sparta.handler.CheckHandler;
-//import kr.sparta.handler.ReserveHandler;
 
 import kr.sparta.dao.ReservationDAO;
 import kr.sparta.domain.ManagementRoom;
 import kr.sparta.domain.Reservation;
 import kr.sparta.domain.Room;
+import kr.sparta.handler.AdminHandler;
 import kr.sparta.handler.CheckHandler;
 import kr.sparta.handler.ReserveHandler;
 
@@ -28,6 +27,7 @@ public class ReservationApp {
 
         ReserveHandler reserveHandler = new ReserveHandler();
         CheckHandler checkHandler = new CheckHandler();
+        AdminHandler adminHandler = new AdminHandler();
 //        AdminHandler adminHandler = new AdminHandler();
         Scanner sc = new Scanner(System.in);
         ReservationDAO dao = new ReservationDAO();
@@ -47,7 +47,7 @@ public class ReservationApp {
             System.out.println("3. 방 현황 확인");
             String customerName, customerPhoneNumber;
             int day = 0;
-            int cash;
+            long cash;
             int number;
             //////
             while(!sc.hasNextInt()) {
@@ -90,12 +90,12 @@ public class ReservationApp {
                     }
                     System.out.println("------------------------------------------------------");
                     System.out.println("본인의 보유 현금을 입력해주세요.");
-                    while(!sc.hasNextInt()) {
+                    while(!sc.hasNextLong()) {
                         sc.next();
                         System.out.println("------------------------------------------------------");
                         System.out.println("올바른 숫자를 입력해주세요");
                     }
-                    cash = sc.nextInt();
+                    cash = sc.nextLong();
                     sc.nextLine();
 
                     if (cash < 50000) {
@@ -133,8 +133,10 @@ public class ReservationApp {
                     String customerReservationNumber = sc.next();
                     checkHandler.printMyReservation(customerReservationNumber);
                     break;
-//                case 9:
-//                    adminHandler.printReservationList();
+                case 9:
+                    adminHandler.printAllReservations();
+                    System.out.println("------------------------------------------------------");
+                    break;
                 default:
                     System.out.println("------------------------------------------------------");
                     System.out.println("존재하지 않는 메뉴입니다.");
