@@ -26,7 +26,7 @@ public class ReserveHandler {
     ReservationDAO dao = new ReservationDAO();
 
 
-    public void show(long cash,int day) {
+    public void show(int day) {
         //30~31일 모든 일수담긴 리스트 가져오기
         ArrayList<ManagementRoom> managementRooms= dao.getRoomData();
 
@@ -51,9 +51,6 @@ public class ReserveHandler {
             System.out.printf("%d. %s\n",roomSize,sizeName );
         }
 
-
-        return null;
-
     }
 
 
@@ -74,6 +71,7 @@ public class ReserveHandler {
                 long roomPrice = dao.roomgetPrice(roomSelect);
                 //소지금에 따라 예약 가능,불가 처리
                 if (cash - roomPrice >= 0) {
+
                     long wallet = cash - roomPrice;
                     dao.inputReserveData(roomSelect, name, number, date, wallet);
                     System.out.printf("%s님 예약이 완료됐습니다.\n", name);

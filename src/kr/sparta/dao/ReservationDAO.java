@@ -83,7 +83,7 @@ public class ReservationDAO {
         this.customerDataList.add(new Customer(customerName,customerPhoneNumber,cash,uuid));
 
         hotel.setAssets(cash);
-        hotel.getManagementRoom().get(day).getReserveDateFlag()[roomID] = true;
+        hotel.getManagementRoom().get(day-1).getReserveDateFlag()[roomID-1] = true;
         this.hotel.setReservationList(this.reservationList);
     }
 
@@ -111,7 +111,7 @@ public class ReservationDAO {
             {
                 hotel.getReservationList().remove(i);
                 hotel.getManagementRoom().get(hotel.getReservationList().get(i).getAccommodationDay())
-                        .getReserveDateFlag()[hotel.getReservationList().get(i).getRoomId()] = false;
+                        .getReserveDateFlag()[hotel.getReservationList().get(i).getRoomId()-1] = false;
                 removeFlag = true;
                 break;
             }
