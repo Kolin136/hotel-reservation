@@ -31,7 +31,7 @@ public class ReservationApp {
 //        AdminHandler adminHandler = new AdminHandler();
         Scanner sc = new Scanner(System.in);
         ReservationDAO dao = new ReservationDAO();
-        int n = dao.inputManagementRoom();
+        int dayLength = dao.inputManagementRoom();
 
         String phoneNumberPattern = "^\\d{3}-\\d{3,4}-\\d{4}$";
         String namePattern = "^[가-힣]{2,5}$";
@@ -67,8 +67,7 @@ public class ReservationApp {
                     System.out.println("성함을 입력해주세요.");
                     while(true) {
                         System.out.println("------------------------------------------------------");
-                        customerName = sc.next();
-                        sc.nextLine();
+                        customerName = sc.nextLine();
                         if(Pattern.matches(namePattern,customerName)) {
                             break;
                         } else {
@@ -112,16 +111,25 @@ public class ReservationApp {
                             System.out.println("------------------------------------------------------");
                             System.out.println("올바른 숫자를 입력해주세요");
                         }
+
                         day = sc.nextInt();
                         sc.nextLine();
+
+                        if(day > dayLength || day < LocalDate.now().getDayOfMonth()) {
+                            System.out.println("------------------------------------------------------");
+                            System.out.println("오늘은 " + LocalDate.now().getMonthValue() + "월 " + LocalDate.now().getDayOfMonth() + "일 입니다.");
+                            System.out.println("올바른 날짜를 입력해주세요");
+                            continue;
+                        }
 
                         if (reserveHandler.show(day) == 0) {
                             System.out.println("------------------------------------------------------");
                             System.out.println("예약이 가능한 객실이 없습니다. 다른 날짜를 입력해주세요.");
+                            System.out.println("------------------------------------------------------");
                         } else {
                             reserveHandler.reserve(customerName, customerPhoneNumber, cash, day);
-                            break;
                         }
+                        break;
                     }
 
                     break;
