@@ -73,7 +73,6 @@ public class ReservationDAO {
         return managementRoom.get(0).getRoomList().getRoomSize()[index - 1];
     }
 
-
     // 방 번호 get메서드
     public int getRoomNumber(int index) {
         return managementRoom.get(0).getRoomList().getRoomID()[index - 1];
