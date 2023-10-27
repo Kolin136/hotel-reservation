@@ -9,14 +9,13 @@ import java.time.LocalDate;
 
 public class CheckHandler {
 
-    BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-    ReservationDAO dao = new ReservationDAO();
+    private BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+    private ReservationDAO dao = new ReservationDAO();
 
     public Reservation getReservation(String reservationId) {
         Reservation reservation = dao.getInquiry(reservationId);
         return reservation;
     }
-    //{"Standard", "Superior", "Deluxe"} // 방 size
     public void printMyReservation(String reservationId) {
         Reservation reservation = getReservation(reservationId);
         if (reservation != null) {
