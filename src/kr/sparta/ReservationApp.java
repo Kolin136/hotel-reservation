@@ -122,7 +122,7 @@ public class ReservationApp {
                             continue;
                         }
 
-                        if (reserveHandler.show(day) == 0) {
+                        if (reserveHandler.show(day,true).isEmpty()) {
                             System.out.println("------------------------------------------------------");
                             System.out.println("예약이 가능한 객실이 없습니다. 다른 날짜를 입력해주세요.");
                             System.out.println("------------------------------------------------------");

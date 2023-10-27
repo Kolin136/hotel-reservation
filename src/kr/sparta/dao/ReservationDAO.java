@@ -103,11 +103,11 @@ public class ReservationDAO {
     public String inputReserveData ( int roomID, String customerName, String customerPhoneNumber,int day ,long cash)
     {
         String uuid = uuidCreate();
-        hotel.getReservationList().add(new Reservation(roomID, customerName, customerPhoneNumber, locaDateCreate(), day-1, uuid));
+        hotel.getReservationList().add(new Reservation(roomID, customerName, customerPhoneNumber, locaDateCreate(), day, uuid));
         customerDataList.add(new Customer(customerName,customerPhoneNumber,cash,uuid));
-        hotel.setAssets(cash);
+        hotel.setAssets(getRoomPrice(roomID));
         hotel.getManagementRoom().get(day-1).getReserveDateFlag()[roomID-1] = true;
-        hotel.setReservationList(reservationList);
+        hotel.setManagementRoom(managementRoom);
         return uuid;
     }
 
@@ -139,7 +139,7 @@ public class ReservationDAO {
             for (int i = 0; i < hotel.getReservationList().size(); i++) {
                 if(hotel.getReservationList().get(i).getReservationNumber().equals(uuid))
                 {
-                    hotel.getManagementRoom().get(hotel.getReservationList().get(i).getAccommodationDay()) // 호텔 빈방으로 설정
+                    hotel.getManagementRoom().get(hotel.getReservationList().get(i).getAccommodationDay()-1) // 호텔 빈방으로 설정
                             .getReserveDateFlag()[hotel.getReservationList().get(i).getRoomId()-1] = false;
                     name = customerDataList.get(i).getName(); // 반환할 유저 이름
                     phoneNumber = customerDataList.get(i).getPhoneNumber(); // 반환할 전화번호
