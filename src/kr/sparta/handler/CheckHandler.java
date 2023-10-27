@@ -26,16 +26,11 @@ public class CheckHandler {
             System.out.println("예약 번호: " + reservationId);
             System.out.println("성함: " + reservation.getCustomerName());
             System.out.println("연락처: " + reservation.getCustomerPhoneNumber());
-            String roomSize = "";
+
             int roomId = reservation.getRoomId();
-            if(roomId == 1) {
-                roomSize = "Standard";
-            } else if(roomId == 2) {
-                roomSize = "Superior";
-            } else if(roomId == 3) {
-                roomSize = "Deluxe";
-            }
-            System.out.println("예약객실: " + reservation.getRoomId() + "." + roomSize);
+            String roomSize = dao.getRoomSize(roomId);
+
+            System.out.println("예약객실: " + roomId + "." + roomSize);
             System.out.println("예약일자: " + now.getYear() + "." + now.getMonthValue() + "." + reservation.getAccommodationDay());
             System.out.println();
             while (true) {
