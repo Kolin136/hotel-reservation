@@ -73,7 +73,6 @@ public class ReserveHandler {
             //해당날 예약 가능한 방 목록 불러오기
             ArrayList<Integer> openRoom = this.show(date,false);
             StringBuilder regex = new StringBuilder("^[");
-            int openRoomSize = openRoom.size();
 
             //예약 가능방 선택 제한 처리
             for (int i = 0; i <= openRoom.size(); i++) {
