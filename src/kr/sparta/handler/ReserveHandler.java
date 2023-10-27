@@ -24,11 +24,11 @@ public class ReserveHandler {
 
         System.out.println("[" + year + "년 " + month + "월" + "]");
 
-        String days = "일월화수목금토";
 
-        System.out.printf("%-16s%-17s%-16s%-16s%-16s%-17s%s\n",
-                days.charAt(0), days.charAt(1), days.charAt(2), days.charAt(3),
-                days.charAt(4), days.charAt(5), days.charAt(6));
+        String[] days ={"Sun","Mon","Tue","Wen","Thu","Fri","Sat"};
+
+        System.out.printf("%-17s%-17s%-17s%-17s%-17s%-17s%s\n",
+                days[0], days[1], days[2], days[3], days[4], days[5], days[6]);
 
         for (int k = 1; k <= endDay+startDay; k++) {
 
@@ -40,7 +40,10 @@ public class ReserveHandler {
                 ArrayList<Integer> dayReservationAvailable = show(k-startDay, false);
 
 
+              
+
                 if (dayReservationAvailable.isEmpty() || ((month == LocalDate.now().getMonthValue()) && k-startDay < LocalDate.now().getDayOfMonth())){
+
                     System.out.printf("%-15s", "[X]");
                 }
                 else {
