@@ -33,7 +33,6 @@ public class ReserveHandler {
 //        }
 //    }
 
-
     public ArrayList<Integer> show(int day,boolean check) {
         //30~31일 모든 일수담긴 리스트 가져오기
         ArrayList<ManagementRoom> managementRooms = dao.getRoomData();
