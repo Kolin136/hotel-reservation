@@ -5,9 +5,8 @@ import java.util.UUID;
 public class Customer {
     private String name; //이름
     private String phoneNumber; //전화번호(XXX-XXXX-XXXX)정규표현식
-    private long cash;
-
-    private String uuid;
+    private long cash; // 유저가 가지고 있는 현금
+    private String uuid; // 유저가 가지고있는 uuid
 
 
     public Customer(String name, String phoneNumber, long cash,String uuid) {
