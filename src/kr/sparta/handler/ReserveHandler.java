@@ -137,7 +137,7 @@ public class ReserveHandler {
                         System.out.println("이 정보로 예약하시겠습니까?");
                         System.out.println("성함: " + name);
                         System.out.println("연락처: " + number);
-                        System.out.println("예약객실: " + dao.getRoomSize(roomSelect));
+                        System.out.println("예약객실: "+ roomSelect + "." + dao.getRoomSize(roomSelect));
                         LocalDate now = LocalDate.now();
                         System.out.println("예약일자: " + now.getYear() + "." + now.getMonthValue() + "." + date);
                         System.out.println("------------------------------------------------------");
