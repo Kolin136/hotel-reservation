@@ -105,8 +105,9 @@ public class ReservationDAO {
         String uuid = uuidCreate();
         hotel.getReservationList().add(new Reservation(roomID, customerName, customerPhoneNumber, locaDateCreate(), day, uuid));
         customerDataList.add(new Customer(customerName,customerPhoneNumber,cash,uuid));
-        hotel.setAssets(cash);
+        hotel.setAssets(getRoomPrice(roomID));
         hotel.getManagementRoom().get(day-1).getReserveDateFlag()[roomID-1] = true;
+
         return uuid;
     }
 
