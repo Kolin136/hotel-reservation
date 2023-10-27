@@ -6,6 +6,7 @@ import kr.sparta.domain.ManagementRoom;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
@@ -16,22 +17,45 @@ public class ReserveHandler {
     ReservationDAO dao = new ReservationDAO();
 
 
-//    public void showAll(int year, int month) {
-//        LocalDate calender = LocalDate.of(year, month, 1);
-//        int startDay = calender.getDayOfWeek().getValue(); //해당 달의 1일이 무슨 요일인지(월요일:1 ~ 일요일:7)
-//        int endDay = calender.lengthOfMonth(); // 해당 달이 30 or 31 몇일까지 있는지
-//
-//        System.out.println("[" + year + "년 " + month + "월" + "]");
-//        System.out.println("일\t월\t화\t수\t목\t금\t토");
-//
-//        for (int k = 1; k <= endDay; k++) {
-//            System.out.printf("%02d\t", k);
-//            if (k % 7 == 0) {
-//                System.out.println();
-//            }
-//
-//        }
-//    }
+    public void showAll(int year, int month) {
+        LocalDate calender = LocalDate.of(year, month, 1);
+        int startDay = calender.getDayOfWeek().getValue(); //해당 달의 1일이 무슨 요일인지(월요일:1 ~ 일요일:7)
+        int endDay = calender.lengthOfMonth(); // 해당 달이 30 or 31 몇일까지 있는지
+
+        System.out.println("[" + year + "년 " + month + "월" + "]");
+
+        String days = "일월화수목금토";
+
+        System.out.printf("%-16s%-17s%-16s%-16s%-16s%-17s%s\n",
+                days.charAt(0), days.charAt(1), days.charAt(2), days.charAt(3),
+                days.charAt(4), days.charAt(5), days.charAt(6));
+
+        for (int k = 1; k <= endDay+startDay; k++) {
+
+            if(k<=startDay){
+                System.out.printf("%-17s","");
+            }
+            else {
+                System.out.printf("%02d", k-startDay);
+                ArrayList<Integer> dayReservationAvailable = show(k-startDay, false);
+
+
+                if (dayReservationAvailable.isEmpty() || ((month == LocalDate.now().getMonthValue()) && k-startDay < LocalDate.now().getDayOfMonth())){
+                    System.out.printf("%-15s", "[X]");
+                }
+                else {
+                    System.out.printf("%-15s", dayReservationAvailable);
+                }
+            }
+            if (k % 7 == 0) {
+                System.out.println();
+            }
+
+
+        }
+        System.out.println();
+
+    }
 
 
 
