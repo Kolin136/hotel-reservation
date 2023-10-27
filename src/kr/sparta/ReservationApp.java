@@ -69,34 +69,10 @@ public class ReservationApp {
                     System.out.println("예약을 원하시는 월을 선택해주세요");
                     System.out.println("------------------------------------------------------");
 
-                    int month = 0;
-                    while(true) {
-                        while(!sc.hasNextInt()) {
-                            sc.next();
-                            System.out.println("------------------------------------------------------");
-                            System.out.println("올바른 숫자를 입력해주세요");
-                        }
-                        month = sc.nextInt();
-                        sc.nextLine();
-                        if(month < now.getMonthValue() || month >= 13) {
-                            System.out.println("------------------------------------------------------");
-                            System.out.println("올바른 숫자를 입력해주세요");
-                        } else break;
-                    }
+                    int month = now.getMonthValue();
 
                     System.out.println(month + "월 예약현황입니다.");
                     reserveHandler.showAll(now.getYear(), month);
-                    System.out.println();
-                    System.out.println("------------------------------------------------------");
-                    System.out.println("1.예약 진행                     2.메인메뉴로");
-                    while(!sc.hasNextInt()) {
-                        sc.next();
-                        System.out.println("------------------------------------------------------");
-                        System.out.println("올바른 숫자를 입력해주세요");
-                    }
-                    int option = sc.nextInt();
-                    sc.nextLine();
-                    if(option != 1) break;
 
                     System.out.println("------------------------------------------------------");
                     System.out.println("성함을 입력해주세요.");
