@@ -12,6 +12,8 @@ public class AdminHandler {
         for(Reservation r : reservationList) {
             System.out.println(r);
         }
-
+    }
+    public int getDayLength() {
+        return dao.inputManagementRoom();
     }
 }
