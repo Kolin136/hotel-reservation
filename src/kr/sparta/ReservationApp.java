@@ -56,6 +56,7 @@ public class ReservationApp {
             number = sc.nextInt();
             sc.nextLine();
             //////
+            mainLoop:
             switch (number) {
                 case 0:
                     System.out.println("프로그램 종료");
@@ -70,10 +71,17 @@ public class ReservationApp {
                         customerName = sc.nextLine();
                         if(Pattern.matches(namePattern,customerName)) {
                             break;
-                        } else {
+                        }
+                        ///////////
+                        else if(customerName.equals("0")) {
+                            break mainLoop;
+                        }
+                        ///////////
+                        else {
                             System.out.println("------------------------------------------------------");
                             System.out.println("틀린 형식의 이름입니다. 다시 입력해주십시오");
                         }
+
                     }
                     System.out.println("------------------------------------------------------");
                     System.out.println("전화번호를 입력해주세요.(XXX-XXXX-XXXX)");
@@ -81,7 +89,13 @@ public class ReservationApp {
                         customerPhoneNumber = sc.nextLine();
                         if(Pattern.matches(phoneNumberPattern,customerPhoneNumber)) {
                             break;
-                        } else {
+                        }
+                        ///////////
+                        else if(customerPhoneNumber.equals("0")) {
+                            break mainLoop;
+                        }
+                        ///////////
+                        else {
                             System.out.println("------------------------------------------------------");
                             System.out.println("틀린 형식의 전화번호입니다. 다시 입력해주십시오");
                         }
@@ -95,6 +109,11 @@ public class ReservationApp {
                     }
                     cash = sc.nextLong();
                     sc.nextLine();
+                    ///////////
+                    if(customerPhoneNumber.equals("0")) {
+                        break mainLoop;
+                    }
+                    ///////////
 
                     if (cash < 50000) {
                         System.out.println("------------------------------------------------------");
@@ -115,6 +134,12 @@ public class ReservationApp {
                         day = sc.nextInt();
                         sc.nextLine();
 
+                        ///////////
+                        if(day == 0) {
+                            break mainLoop;
+                        }
+                        ///////////
+
                         if(day > dayLength || day < LocalDate.now().getDayOfMonth()) {
                             System.out.println("------------------------------------------------------");
                             System.out.println("오늘은 " + LocalDate.now().getMonthValue() + "월 " + LocalDate.now().getDayOfMonth() + "일 입니다.");
@@ -122,7 +147,9 @@ public class ReservationApp {
                             continue;
                         }
 
+
                         if (reserveHandler.show(day,true).isEmpty()) {
+
                             System.out.println("------------------------------------------------------");
                             System.out.println("예약이 가능한 객실이 없습니다. 다른 날짜를 입력해주세요.");
                             System.out.println("------------------------------------------------------");
@@ -138,11 +165,28 @@ public class ReservationApp {
                     System.out.println("------------------------------------------------------");
                     System.out.println("예약번호를 입력해주세요.");
                     String customerReservationNumber = sc.nextLine();
+                    ///////////
+                    if(customerReservationNumber.equals("0")) {
+                        break mainLoop;
+                    }
+                    ///////////
                     checkHandler.printMyReservation(customerReservationNumber);
                     break;
                 case 9:
                     adminHandler.printAllReservations();
                     System.out.println("------------------------------------------------------");
+                    //////////////
+                    ArrayList<ManagementRoom> managementRooms = dao.getRoomData();
+                    for(int i = 26; i <= dayLength; i++) {
+                        System.out.println("Day" + i);
+                        ManagementRoom m = managementRooms.get(i-1);
+                        for(int j = 0; j < 3; j++) {
+                            System.out.print(m.getReserveDateFlag()[j] + " ");
+                        }
+                        System.out.println();
+                    }
+
+                    ///////////
                     break;
                 default:
                     System.out.println("------------------------------------------------------");
