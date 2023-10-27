@@ -6,6 +6,7 @@ import kr.sparta.domain.ManagementRoom;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
@@ -23,6 +24,7 @@ public class ReserveHandler {
 
         System.out.println("[" + year + "년 " + month + "월" + "]");
 
+
         String[] days ={"Sun","Mon","Tue","Wen","Thu","Fri","Sat"};
 
         System.out.printf("%-17s%-17s%-17s%-17s%-17s%-17s%s\n",
@@ -38,7 +40,10 @@ public class ReserveHandler {
                 ArrayList<Integer> dayReservationAvailable = show(k-startDay, false);
 
 
-                if (dayReservationAvailable.isEmpty() ||((month == LocalDate.now().getMonthValue()) && k-startDay < LocalDate.now().getDayOfMonth())){
+              
+
+                if (dayReservationAvailable.isEmpty() || ((month == LocalDate.now().getMonthValue()) && k-startDay < LocalDate.now().getDayOfMonth())){
+
                     System.out.printf("%-15s", "[X]");
                 }
                 else {
