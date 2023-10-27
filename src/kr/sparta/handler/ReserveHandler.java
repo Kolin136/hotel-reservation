@@ -20,7 +20,7 @@ public class ReserveHandler {
     public void showAll(int year, int month) {
         LocalDate calender = LocalDate.of(year, month, 1);
         int startDay = calender.getDayOfWeek().getValue(); //해당 달의 1일이 무슨 요일인지(월요일:1 ~ 일요일:7)
-        int endDay = calender.lengthOfMonth(); // 해당 달이 30 or 31 몇일까지 있는지
+        int endDay = calender.lengthOfMonth(); // 해당 달이 30 or 31 몇일까지 있는지.
 
         System.out.println("[" + year + "년 " + month + "월" + "]");
 
@@ -137,7 +137,7 @@ public class ReserveHandler {
                         System.out.println("이 정보로 예약하시겠습니까?");
                         System.out.println("성함: " + name);
                         System.out.println("연락처: " + number);
-                        System.out.println("예약객실: " + dao.getRoomSize(roomSelect));
+                        System.out.println("예약객실: "+ roomSelect + "." + dao.getRoomSize(roomSelect));
                         LocalDate now = LocalDate.now();
                         System.out.println("예약일자: " + now.getYear() + "." + now.getMonthValue() + "." + date);
                         System.out.println("------------------------------------------------------");
