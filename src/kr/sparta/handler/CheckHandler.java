@@ -16,7 +16,7 @@ public class CheckHandler {
         Reservation reservation = dao.getInquiry(reservationId);
         return reservation;
     }
-
+    //{"Standard", "Superior", "Deluxe"} // 방 size
     public void printMyReservation(String reservationId) {
         Reservation reservation = getReservation(reservationId);
         if (reservation != null) {
@@ -26,7 +26,16 @@ public class CheckHandler {
             System.out.println("예약 번호: " + reservationId);
             System.out.println("성함: " + reservation.getCustomerName());
             System.out.println("연락처: " + reservation.getCustomerPhoneNumber());
-            System.out.println("예약객실: " + reservation.getRoomId());
+            String roomSize = "";
+            int roomId = reservation.getRoomId();
+            if(roomId == 1) {
+                roomSize = "Standard";
+            } else if(roomId == 2) {
+                roomSize = "Superior";
+            } else if(roomId == 3) {
+                roomSize = "Deluxe";
+            }
+            System.out.println("예약객실: " + reservation.getRoomId() + "." + roomSize);
             System.out.println("예약일자: " + now.getYear() + "." + now.getMonthValue() + "." + reservation.getAccommodationDay());
             System.out.println();
             while (true) {
