@@ -28,11 +28,9 @@ public class ReservationApp {
         ReserveHandler reserveHandler = new ReserveHandler();
         CheckHandler checkHandler = new CheckHandler();
         AdminHandler adminHandler = new AdminHandler();
-//        AdminHandler adminHandler = new AdminHandler();
         Scanner sc = new Scanner(System.in);
-        ReservationDAO dao = new ReservationDAO();
         LocalDate now = LocalDate.now();
-        int dayLength = dao.inputManagementRoom();
+        int dayLength = adminHandler.getDayLength();
 
         String phoneNumberPattern = "^\\d{3}-\\d{3,4}-\\d{4}$";
         String namePattern = "^[가-힣]{2,5}$";
