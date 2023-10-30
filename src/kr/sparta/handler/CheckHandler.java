@@ -9,14 +9,13 @@ import java.time.LocalDate;
 
 public class CheckHandler {
 
-    BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-    ReservationDAO dao = new ReservationDAO();
+    private BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+    private ReservationDAO dao = new ReservationDAO();
 
     public Reservation getReservation(String reservationId) {
         Reservation reservation = dao.getInquiry(reservationId);
         return reservation;
     }
-    //{"Standard", "Superior", "Deluxe"} // 방 size
     public void printMyReservation(String reservationId) {
         Reservation reservation = getReservation(reservationId);
         if (reservation != null) {
@@ -26,16 +25,11 @@ public class CheckHandler {
             System.out.println("예약 번호: " + reservationId);
             System.out.println("성함: " + reservation.getCustomerName());
             System.out.println("연락처: " + reservation.getCustomerPhoneNumber());
-            String roomSize = "";
+
             int roomId = reservation.getRoomId();
-            if(roomId == 1) {
-                roomSize = "Standard";
-            } else if(roomId == 2) {
-                roomSize = "Superior";
-            } else if(roomId == 3) {
-                roomSize = "Deluxe";
-            }
-            System.out.println("예약객실: " + reservation.getRoomId() + "." + roomSize);
+            String roomSize = dao.getRoomSize(roomId);
+
+            System.out.println("예약객실: " + roomId + "." + roomSize);
             System.out.println("예약일자: " + now.getYear() + "." + now.getMonthValue() + "." + reservation.getAccommodationDay());
             System.out.println();
             while (true) {
@@ -71,7 +65,7 @@ public class CheckHandler {
             System.out.println("1.예    2.아니오");
             int choice = getNumber();
             if (choice == 1) {
-                dao.reservationRemove(reservationId);
+                dao.removeReservation(reservationId);
                 System.out.println("취소가 완료되었습니다.");
                 break;
             } else if (choice == 2) {

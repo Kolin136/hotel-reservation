@@ -25,10 +25,15 @@
 ![클래스 다이어그램2](./img/클래스다이어그램22.jpg)
 
 ## :camera:ScreenShots
-### 메인
+### 메인화면
+![메인화면](./img/메인화면.png)
 ### 예약하기
-### 예약확인
-### 예약취소
+![예약화면1](./img/예약하기1.png)
+![예약화면2](./img/예약하기2.png)
+![예약화면3](./img/예약하기3.png)
+### 예약확인/취소
+![예약화면3](./img/예약취소.png)
+
 
 ## What We Learned
 * [객체지향의 4가지 특성](https://www.codestates.com/blog/content/%EA%B0%9D%EC%B2%B4-%EC%A7%80%ED%96%A5-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%8A%B9%EC%A7%95)<br>
