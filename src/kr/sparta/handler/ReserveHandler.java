@@ -17,7 +17,7 @@ public class ReserveHandler {
     ReservationDAO dao = new ReservationDAO();
 
 
-    public void showAll(int year, int month) {
+    public void showMonth(int year, int month) {
         LocalDate calender = LocalDate.of(year, month, 1);
         int startDay = calender.getDayOfWeek().getValue(); //해당 달의 1일이 무슨 요일인지(월요일:1 ~ 일요일:7)
         int endDay = calender.lengthOfMonth(); // 해당 달이 30 or 31 몇일까지 있는지.
@@ -37,7 +37,7 @@ public class ReserveHandler {
             }
             else {
                 System.out.printf("%02d", k-startDay);
-                ArrayList<Integer> dayReservationAvailable = show(k-startDay, false);
+                ArrayList<Integer> dayReservationAvailable = showDay(k-startDay, false);
 
 
               
@@ -62,7 +62,7 @@ public class ReserveHandler {
 
 
 
-    public ArrayList<Integer> show(int day, boolean check) {
+    public ArrayList<Integer> showDay(int day, boolean check) {
 
         //30~31일 모든 일수담긴 리스트 가져오기
         ArrayList<ManagementRoom> managementRooms = dao.getRoomData();
@@ -101,7 +101,7 @@ public class ReserveHandler {
     public void reserve(String name, String number, long cash, int date) throws IOException {
 
             //해당날 예약 가능한 방 목록 불러오기
-            ArrayList<Integer> openRoom = this.show(date,false);
+            ArrayList<Integer> openRoom = this.showDay(date,false);
             StringBuilder regex = new StringBuilder("^[");
 
             //예약 가능방 선택 제한 처리

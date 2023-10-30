@@ -47,11 +47,6 @@ public class ReservationDAO {
         return inputmonthofDay;
     }
 
-    // 호텔 정보
-    public Hotel getHotel() {
-        return hotel;
-    }
-
     // 예약 정보
     public ArrayList<Reservation> getReservationList() {
         return reservationList;
@@ -77,30 +72,20 @@ public class ReservationDAO {
         return managementRoom.get(0).getRoomList().getRoomID()[index - 1];
     }
 
-    // 방 정보 get 메서드
-    public Room getRoomInfo()
-    {
-        int[] roomNumber = {1,2,3};
-        String[] roomSize = {"Standard", "Superior", "Deluxe"};
-        long[] roomPrice ={50000L, 100000L, 150000L};
-        return new Room(roomNumber,roomSize,roomPrice);
-    }
-
-
     // uuid random 생성 메서드
-    public String uuidCreate(){
+    public String createUUID(){
         return UUID.randomUUID().toString().substring(0,8);
     }
 
-    public LocalDateTime locaDateCreate(){
+    public LocalDateTime createLocalDate(){
         return LocalDateTime.now();
     }
 
     //Reservation 객체에 예약정보 입력
     public String inputReserveData ( int roomID, String customerName, String customerPhoneNumber,int day ,long cash)
     {
-        String uuid = uuidCreate();
-        hotel.getReservationList().add(new Reservation(roomID, customerName, customerPhoneNumber, locaDateCreate(), day, uuid));
+        String uuid = createUUID();
+        hotel.getReservationList().add(new Reservation(roomID, customerName, customerPhoneNumber, createLocalDate(), day, uuid));
         customerDataList.add(new Customer(customerName,customerPhoneNumber,cash,uuid));
         hotel.setAssets(getRoomPrice(roomID));
         hotel.getManagementRoom().get(day-1).getReserveDateFlag()[roomID-1] = true;
@@ -125,12 +110,7 @@ public class ReservationDAO {
     }
 
     // 예약제거
-    public Customer reservationRemove(String uuid){
-        String name= "";
-        String phoneNumber ="";
-        long cash = 0;
-        boolean removeFlag = false;
-        Customer customer = null;
+    public void removeReservation(String uuid){
         if(customerDataList.size() == hotel.getReservationList().size()) // 두개의 리스트 사이즈가 같은지 체크
         {
             for (int i = 0; i < hotel.getReservationList().size(); i++) {
@@ -138,20 +118,12 @@ public class ReservationDAO {
                 {
                     hotel.getManagementRoom().get(hotel.getReservationList().get(i).getAccommodationDay()-1) // 호텔 빈방으로 설정
                             .getReserveDateFlag()[hotel.getReservationList().get(i).getRoomId()-1] = false;
-                    name = customerDataList.get(i).getName(); // 반환할 유저 이름
-                    phoneNumber = customerDataList.get(i).getPhoneNumber(); // 반환할 전화번호
-                    cash = customerDataList.get(i).getCash() +
-                            hotel.getManagementRoom().get(i).getRoomList().getFee()[hotel.getReservationList().get(i).getRoomId()-1]; // 환불후 남은 캐쉬
                     customerDataList.remove(i); // 저장후 고객 정보 제거
                     hotel.getReservationList().remove(i); // 저장후 호텔 고객정보 제거
-                    removeFlag = true; // 제거 확인 flag
                     break;
                 }
             }
         }
-        if(removeFlag)
-            customer = new Customer(name, phoneNumber, cash, uuid);
-        return customer;
     }
 
 
