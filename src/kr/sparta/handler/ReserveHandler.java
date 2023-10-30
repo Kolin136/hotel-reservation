@@ -15,7 +15,8 @@ public class ReserveHandler {
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     ReservationDAO dao = new ReservationDAO();
 
-    public void showAll(int year, int month) {
+    //해당달의 예약 가능방 목록 메소드
+    public void showMonth(int year, int month) {
         LocalDate calender = LocalDate.of(year, month, 1);
         int startDay = calender.getDayOfWeek().getValue(); //해당 달의 1일이 무슨 요일인지(월요일:1 ~ 일요일:7)
         int endDay = calender.lengthOfMonth(); // 해당 달이 30 or 31 몇일까지 있는지.
@@ -35,7 +36,7 @@ public class ReserveHandler {
                 System.out.printf("%-17s", "");
             } else {
                 System.out.printf("%02d", k - startDay);
-                ArrayList<Integer> dayReservationAvailable = show(k - startDay, false);
+                ArrayList<Integer> dayReservationAvailable = showDay(k - startDay, false);
                 //오늘 이전의 날들은 [x]로 처리
                 if (dayReservationAvailable.isEmpty() || ((month == LocalDate.now().getMonthValue()) && k - startDay < LocalDate.now().getDayOfMonth())) {
 
@@ -55,8 +56,8 @@ public class ReserveHandler {
 
     }
 
-
-    public ArrayList<Integer> show(int day, boolean check) {
+    //해당일의 예약 가능방 목록 메소드
+    public ArrayList<Integer> showDay(int day, boolean check) {
 
         //30~31일 모든 일수담긴 리스트 가져오기
         ArrayList<ManagementRoom> managementRooms = dao.getRoomData();
@@ -76,7 +77,7 @@ public class ReserveHandler {
             }
         }
 
-        // show메소드를 예약 가능 방 목록 리턴용으로만 사용 or 목록 출력+리턴까지 할건가
+        // showDay메소드를 예약 가능 방 목록 리턴용으로만 사용 or 목록 출력+리턴까지 할건가
         if (check) {
             System.out.printf("%d일 예약 가능방 목록입니다\n", day);
             for (int roomSize : roomResult) {
@@ -91,11 +92,11 @@ public class ReserveHandler {
     }
 
 
-    //예약하기 함수
+    //예약하기 메소드
     public void reserve(String name, String number, long cash, int date) throws IOException {
 
         //해당날 예약 가능한 방 목록 불러오기
-        ArrayList<Integer> openRoom = this.show(date, false);
+        ArrayList<Integer> openRoom = this.showDay(date, false);
         StringBuilder regex = new StringBuilder("^[");
 
         //예약 가능방 선택 제한 처리
