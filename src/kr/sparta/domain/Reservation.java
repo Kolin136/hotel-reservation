@@ -1,8 +1,7 @@
 package kr.sparta.domain;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.UUID;
+
 
 public class Reservation {
     private int roomId; // 룸번호

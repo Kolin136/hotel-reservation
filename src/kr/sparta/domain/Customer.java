@@ -1,6 +1,5 @@
 package kr.sparta.domain;
 
-import java.util.UUID;
 
 public class Customer {
     private String name; //이름

@@ -1,7 +1,6 @@
 package kr.sparta.dao;
 
 import kr.sparta.domain.*;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -15,7 +14,7 @@ public class ReservationDAO {
     private static ArrayList<Reservation> reservationList = new ArrayList<>(); // 예약 담당 객체
     private static ArrayList<Customer> customerDataList = new ArrayList<>(); // 고객 정보 객체
     LocalDate cal = LocalDate.now(); // 현재 요일 받기
-    LocalDateTime localDateTime; // UTC
+
     private static Hotel hotel = new Hotel(managementRoom, reservationList, 50000000); // 호텔 객체
 
 
@@ -132,7 +131,7 @@ public class ReservationDAO {
         long cash = 0;
         boolean removeFlag = false;
         Customer customer = null;
-        if(customerDataList.size() == hotel.getReservationList().size())
+        if(customerDataList.size() == hotel.getReservationList().size()) // 두개의 리스트 사이즈가 같은지 체크
         {
             for (int i = 0; i < hotel.getReservationList().size(); i++) {
                 if(hotel.getReservationList().get(i).getReservationNumber().equals(uuid))

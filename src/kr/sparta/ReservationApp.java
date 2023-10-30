@@ -1,22 +1,13 @@
 package kr.sparta;
 
 
-import kr.sparta.dao.ReservationDAO;
-import kr.sparta.domain.ManagementRoom;
-import kr.sparta.domain.Reservation;
-import kr.sparta.domain.Room;
 import kr.sparta.handler.AdminHandler;
 import kr.sparta.handler.CheckHandler;
 import kr.sparta.handler.ReserveHandler;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.sql.SQLOutput;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.UUID;
 import java.util.regex.Pattern;
 
 public class ReservationApp {
