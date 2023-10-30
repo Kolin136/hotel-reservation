@@ -12,10 +12,11 @@ public class CheckHandler {
     private BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
     private ReservationDAO dao = new ReservationDAO();
 
-    public Reservation getReservation(String reservationId) {
+    private Reservation getReservation(String reservationId) {
         Reservation reservation = dao.getInquiry(reservationId);
         return reservation;
     }
+    //나의 예약목록을 확인한다.
     public void printMyReservation(String reservationId) {
         Reservation reservation = getReservation(reservationId);
         if (reservation != null) {
@@ -58,14 +59,14 @@ public class CheckHandler {
             return -1;
         }
     }
-
+    //나의 예약을 취소한다.
     public void cancelReservation(String reservationId) {
         while (true) {
             System.out.println("해당 예약을 취소하시겠습니까?");
             System.out.println("1.예    2.아니오");
             int choice = getNumber();
             if (choice == 1) {
-                dao.reservationRemove(reservationId);
+                dao.removeReservation(reservationId);
                 System.out.println("취소가 완료되었습니다.");
                 break;
             } else if (choice == 2) {
