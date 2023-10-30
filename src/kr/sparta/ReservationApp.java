@@ -1,22 +1,13 @@
 package kr.sparta;
 
 
-import kr.sparta.dao.ReservationDAO;
-import kr.sparta.domain.ManagementRoom;
-import kr.sparta.domain.Reservation;
-import kr.sparta.domain.Room;
 import kr.sparta.handler.AdminHandler;
 import kr.sparta.handler.CheckHandler;
 import kr.sparta.handler.ReserveHandler;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.sql.SQLOutput;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.UUID;
 import java.util.regex.Pattern;
 
 public class ReservationApp {
@@ -70,7 +61,7 @@ public class ReservationApp {
                     int month = now.getMonthValue();
 
                     System.out.println(month + "월 예약현황입니다.");
-                    reserveHandler.showAll(now.getYear(), month);
+                    reserveHandler.showMonth(now.getYear(), month);
 
                     System.out.println("------------------------------------------------------");
                     System.out.println("성함을 입력해주세요.");
@@ -156,7 +147,7 @@ public class ReservationApp {
                         }
 
 
-                        if (reserveHandler.show(day,true).isEmpty()) {
+                        if (reserveHandler.showDay(day,true).isEmpty()) {
 
                             System.out.println("------------------------------------------------------");
                             System.out.println("예약이 가능한 객실이 없습니다. 다른 날짜를 입력해주세요.");

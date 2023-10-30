@@ -65,7 +65,7 @@ public class CheckHandler {
             System.out.println("1.예    2.아니오");
             int choice = getNumber();
             if (choice == 1) {
-                dao.reservationRemove(reservationId);
+                dao.removeReservation(reservationId);
                 System.out.println("취소가 완료되었습니다.");
                 break;
             } else if (choice == 2) {

@@ -15,6 +15,7 @@ public class ReserveHandler {
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     ReservationDAO dao = new ReservationDAO();
 
+
     //해당달의 예약 가능방 목록 메소드
     public void showMonth(int year, int month) {
         LocalDate calender = LocalDate.of(year, month, 1);
@@ -29,9 +30,9 @@ public class ReserveHandler {
         System.out.printf("%-17s%-17s%-17s%-17s%-17s%-17s%s\n",
                 days[0], days[1], days[2], days[3], days[4], days[5], days[6]);
 
+
         //해당 달의 1일이 어떤 요일부터 시작하는지 해서 endDay+startDay
         for (int k = 1; k <= endDay + startDay; k++) {
-
             if (k <= startDay) {
                 System.out.printf("%-17s", "");
             } else {
@@ -55,6 +56,7 @@ public class ReserveHandler {
         System.out.println();
 
     }
+
 
     //해당일의 예약 가능방 목록 메소드
     public ArrayList<Integer> showDay(int day, boolean check) {
@@ -94,7 +96,6 @@ public class ReserveHandler {
 
     //예약하기 메소드
     public void reserve(String name, String number, long cash, int date) throws IOException {
-
         //해당날 예약 가능한 방 목록 불러오기
         ArrayList<Integer> openRoom = this.showDay(date, false);
         StringBuilder regex = new StringBuilder("^[");
