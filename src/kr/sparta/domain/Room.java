@@ -1,7 +1,5 @@
 package kr.sparta.domain;
 
-import java.util.HashMap;
-import java.util.HashSet;
 
 public class Room {
 

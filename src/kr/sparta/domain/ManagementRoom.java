@@ -1,6 +1,5 @@
 package kr.sparta.domain;
 
-import java.util.ArrayList;
 
 public class ManagementRoom {
 
